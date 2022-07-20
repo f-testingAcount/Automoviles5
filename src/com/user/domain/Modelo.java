@@ -72,11 +72,9 @@ public class Modelo {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //sb.append("Modelo ");
         sb.append("Tipo de Vehiculo: ").append(tipoVehiculo);
         sb.append(" | Denominacion: ").append(denominacion);
         sb.append(" | Cantidad: ").append(cantidad);
-        //sb.append(" | Caracteristicas: ").append(caracteristicas);
         sb.append(" -");
         return sb.toString();
     }

@@ -64,7 +64,6 @@ public class Agencia {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //sb.append("Agencia: ");
         sb.append("Nombre: ").append(nombreAgencia);
         sb.append(" | Ciudad: ").append(ciudad);
         sb.append(" | Marca: ").append(marcaComercializada);

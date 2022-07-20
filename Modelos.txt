@@ -1,1 +1,8 @@
-
+Tipo de Vehiculo: Auto | Denominacion: Testarossa | Cantidad: 50 -
+Tipo de Vehiculo: Auto | Denominacion: F40 | Cantidad: 1311 -
+Tipo de Vehiculo: Auto | Denominacion: 308 GTS | Cantidad: 56 -
+Tipo de Vehiculo: Aventador | Denominacion: Aventador | Cantidad: 60 -
+Tipo de Vehiculo: Auto | Denominacion: Miura | Cantidad: 200 -
+Tipo de Vehiculo: Auto | Denominacion: Siam | Cantidad: 10 -
+Tipo de Vehiculo: SUV | Denominacion: LM002 | Cantidad: 100 -
+Tipo de Vehiculo: SUV | Denominacion: Urus | Cantidad: 200 -

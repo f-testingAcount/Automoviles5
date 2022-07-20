@@ -1,0 +1,8 @@
+ | Modelo: Testarossa | TipoMotor: naftero central | Cilindros: 12 boxer | Cilindrada: 4997 | HP: 390 | Caja: manual de 5 velocidades | Equipamiento: full | Carroceria: berlinetta coupe | id: #123 -
+ | Modelo: F40 | TipoMotor: naftero central | Cilindros: V8 | Cilindrada: 2997 | HP: 450 | Caja: manual de 5 velocidades | Equipamiento: Corsa | Carroceria: auto coupe | id: #124 -
+ | Modelo: 308 GTS | TipoMotor: natero central | Cilindros: V8 | Cilindrada: 3000 | HP: 300 | Caja: manual de 5 velocidades | Equipamiento: full | Carroceria: auto targa | id: #125 -
+ | Modelo: Aventador LP 700-4 | TipoMotor: naftero central | Cilindros: 12 | Cilindrada: 5500 | HP: 600 | Caja: secuencial mixta de 8 velocidades | Equipamiento: full | Carroceria: auto coupe | id: #126 -
+ | Modelo: Miura | TipoMotor: naftero delantero | Cilindros: 12 | Cilindrada: 5000 | HP: 400 | Caja: manual de 5 velocidades | Equipamiento: full | Carroceria: auto coupe | id: #128 -
+ | Modelo: Siam | TipoMotor: naftero central | Cilindros: 12 | Cilindrada: 4000 | HP: 600 | Caja: secuencial mixta de 10 velocidades | Equipamiento: full | Carroceria: auto coupe | id: #130 -
+ | Modelo: LM002 | TipoMotor: naftero delantero | Cilindros: 12 | Cilindrada: 5000 | HP: 500 | Caja: manual de 5 velocidades | Equipamiento: full | Carroceria: SUV | id: #131 -
+ | Modelo: Urus | TipoMotor: naftero delantero | Cilindros: 12 | Cilindrada: 4500 | HP: 700 | Caja: secuencial mixta de 8 velocidades | Equipamiento: full | Carroceria: SUV | id: #132 -

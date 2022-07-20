@@ -8,9 +8,9 @@ import com.user.domain.Modelo;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.IAccionesComerciales;
 import static com.user.negocios.IAccionesComerciales.ARCHIVO_MARCAS;
+import static com.user.negocios.IAccionesComerciales.ARCHIVO_MODELOS;
 import java.io.*;
 import java.util.*;
-
 
 public class AccesoDatosImpl implements IAccesoDatos {
 
@@ -18,58 +18,58 @@ public class AccesoDatosImpl implements IAccesoDatos {
     public void crear(String nombreArchivo) throws AccesoDatosEx {
         File archivo = new File(nombreArchivo);
         switch (nombreArchivo) {
-            case ARCHIVO_MARCAS:
+            case ARCHIVO_MARCAS -> {
                 try {
-                PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
-                System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
-                createFile.close();
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-                throw new AccesoDatosEx("Error al crear el archivo marcas!" + ex.getMessage());
+                    PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
+                    System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
+                    createFile.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                    throw new AccesoDatosEx("Error al crear el archivo marcas!" + ex.getMessage());
+                }
             }
-            break;
-            case IAccionesComerciales.ARCHIVO_MODELOS:
+            case IAccionesComerciales.ARCHIVO_MODELOS -> {
                 try {
-                PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
-                System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
-                createFile.close();
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-                throw new AccesoDatosEx("Error al crear el archivo modelos!" + ex.getMessage());
+                    PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
+                    System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
+                    createFile.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                    throw new AccesoDatosEx("Error al crear el archivo modelos!" + ex.getMessage());
+                }
             }
-            break;
-            case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC:
+            case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC -> {
                 try {
-                PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
-                System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
-                createFile.close();
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-                throw new AccesoDatosEx("Error al crear el archivo caracteristicas tecnicas!" + ex.getMessage());
+                    PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
+                    System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
+                    createFile.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                    throw new AccesoDatosEx("Error al crear el archivo caracteristicas tecnicas!" + ex.getMessage());
+                }
             }
-            break;
-            case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES:
+            case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES -> {
                 try {
-                PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
-                System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
-                createFile.close();
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-                throw new AccesoDatosEx("Error al crear el archivo distribuidores!" + ex.getMessage());
+                    PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
+                    System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
+                    createFile.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                    throw new AccesoDatosEx("Error al crear el archivo distribuidores!" + ex.getMessage());
+                }
             }
-            break;
-            case IAccionesComerciales.ARCHIVO_AGENCIAS:
+            case IAccionesComerciales.ARCHIVO_AGENCIAS -> {
                 try {
-                PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
-                System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
-                createFile.close();
-            } catch (IOException ex) {
-                ex.printStackTrace(System.out);
-                throw new AccesoDatosEx("Error al crear el archivo agencias!" + ex.getMessage());
+                    PrintWriter createFile = new PrintWriter(new FileWriter(archivo));
+                    System.out.println("Se ha creado el archivo " + nombreArchivo + "!");
+                    createFile.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace(System.out);
+                    throw new AccesoDatosEx("Error al crear el archivo agencias!" + ex.getMessage());
+                }
             }
-            break;
-            default:
-                break;
+            default -> {
+            }
         }
     }
 
@@ -84,7 +84,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
         File archivo = new File(nombreArchivo);
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
-                Marca marca = new Marca();
+                Marca marca = (Marca) object;
                 try {
                     PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(marca.toString());
@@ -94,8 +94,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     throw new AccesoDatosEx("Error al escribir en el archivo marcas!" + ex.getMessage());
                 }
             }
-            case IAccionesComerciales.ARCHIVO_MODELOS -> {
-                Modelo modelo = new Modelo();
+            case ARCHIVO_MODELOS -> {
+                Modelo modelo = (Modelo) object;
                 try {
                     PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(modelo.toString());
@@ -106,7 +106,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 }
             }
             case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC -> {
-                CaracteristicasTec caracteristica = new CaracteristicasTec();
+                CaracteristicasTec caracteristica = (CaracteristicasTec) object;
                 try {
                     PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(caracteristica.toString());
@@ -117,7 +117,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 }
             }
             case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES -> {
-                Distribuidor distribuidor = new Distribuidor();
+                Distribuidor distribuidor = (Distribuidor) object;
                 try {
                     PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(distribuidor.toString());
@@ -128,7 +128,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 }
             }
             case IAccionesComerciales.ARCHIVO_AGENCIAS -> {
-                Agencia agencia = new Agencia();
+                Agencia agencia = (Agencia) object;
                 try {
                     PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(agencia.toString());
@@ -139,6 +139,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 }
             }
             default -> {
+                System.out.println("La opcion ingresada no exitste, ingrese una opcion valida!");
             }
         }
     }
@@ -148,12 +149,14 @@ public class AccesoDatosImpl implements IAccesoDatos {
         File archivo = new File(nombreArchivo);
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
+                //Marca marca = (Marca) object;
                 List<Marca> marcas = new ArrayList<>();
                 try {
                     BufferedReader leer = new BufferedReader(new FileReader(archivo));
                     String linea = leer.readLine();
                     while (linea != null) {
-                        Marca marca = new Marca();
+                        Marca marca = (Marca) object;
+                        marca = new Marca(marca.getNombre(), marca.getOrigen(), marca.getLogo());
                         marcas.add(marca);
                         linea = leer.readLine();
                     }
@@ -173,7 +176,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader leer = new BufferedReader(new FileReader(archivo));
                     String linea = leer.readLine();
                     while (linea != null) {
-                        Modelo modelo = new Modelo();
+                        Modelo modelo = (Modelo) object;
+                        modelo = new Modelo(modelo.getTipoVehiculo(), modelo.getDenominacion(), modelo.getCantidad());
                         modelos.add(modelo);
                         linea = leer.readLine();
                     }
@@ -193,7 +197,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader leer = new BufferedReader(new FileReader(archivo));
                     String linea = leer.readLine();
                     while (linea != null) {
-                        CaracteristicasTec caracteristica = new CaracteristicasTec();
+                        CaracteristicasTec caracteristica =  new CaracteristicasTec ();
                         caracteristicas.add(caracteristica);
                         linea = leer.readLine();
                     }
@@ -258,7 +262,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
         File archivo = new File(nombreArchivo);
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
-                Marca marca = new Marca();
+                Marca marca = (Marca) object;
+                marca = new Marca();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -282,7 +287,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 return marca.getNombre();
             }
             case IAccionesComerciales.ARCHIVO_MODELOS -> {
-                Modelo modelo = new Modelo();
+                Modelo modelo = (Modelo) object;
+                modelo = new Modelo();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -306,7 +312,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 return modelo.getDenominacion();
             }
             case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC -> {
-                CaracteristicasTec caracteristica = new CaracteristicasTec();
+                CaracteristicasTec caracteristica = (CaracteristicasTec) object;
+                caracteristica = new CaracteristicasTec();
                 Modelo modelo = new Modelo();
                 String detalle = null;
                 try {
@@ -332,7 +339,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 return detalle;
             }
             case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES -> {
-                Distribuidor distribuidor = new Distribuidor();
+                Distribuidor distribuidor = (Distribuidor) object;
+                distribuidor = new Distribuidor();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -355,7 +363,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 return distribuidor.getNombreDistribuidor();
             }
             case IAccionesComerciales.ARCHIVO_AGENCIAS -> {
-                Agencia agencia = new Agencia();
+                Agencia agencia = (Agencia) object;
+                agencia = new Agencia();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -378,16 +387,16 @@ public class AccesoDatosImpl implements IAccesoDatos {
                 return agencia.getNombreAgencia();
             }
             default -> {
+                System.out.println("La opcion ingresada no exitste, ingrese una opcion valida!");
             }
         }
         return object;
     }
 
-    @Override
-    public int buscarIndice(String nombreArchivo, Object object) throws AccesoDatosEx {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+//    @Override
+//    public int buscarIndice(String nombreArchivo, Object object) throws AccesoDatosEx {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
     @Override
     public void borrar(String nombreArchivo) throws AccesoDatosEx {
         File archivo = new File(nombreArchivo);

@@ -1,17 +1,18 @@
 
 package com.user.negocios;
 
+import com.user.domain.CaracteristicasTec;
 import com.user.domain.Marca;
 import com.user.domain.Modelo;
 
 
 public interface IAccionesComerciales <T>{
     
-    String ARCHIVO_MARCAS = "Marcas.txt";
-    String ARCHIVO_MODELOS = "Modelos.txt";
-    String ARCHIVO_CARACTERISTICAS_TEC = "Caracteristicas Tecnicas.txt";
-    String ARCHIVO_DISTRIBUIDORES = "Distribuidores.txt";
-    String ARCHIVO_AGENCIAS = "Agencias.txt";
+    public static final String ARCHIVO_MARCAS = "Marcas.txt";
+    public static final String ARCHIVO_MODELOS = "Modelos.txt";
+    public static final String ARCHIVO_CARACTERISTICAS_TEC = "Caracteristicas Tecnicas.txt";
+    public static final String ARCHIVO_DISTRIBUIDORES = "Distribuidores.txt";
+    public static final String ARCHIVO_AGENCIAS = "Agencias.txt";
     
     
     void iniciarArchivo();

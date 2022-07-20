@@ -20,7 +20,6 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         try {
             if (this.datos.existe(ARCHIVO_MARCAS)) {
                 System.out.println("El archivo Marcas ya existe!");
-
             } else {
                 this.datos.crear(ARCHIVO_MARCAS);
             }
@@ -31,7 +30,6 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         try {
             if (this.datos.existe(ARCHIVO_MODELOS)) {
                 System.out.println("El archivo Modelos ya existe!");
-
             } else {
                 this.datos.crear(ARCHIVO_MODELOS);
             }
@@ -76,7 +74,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     @Override
     public void agregar(String nombreArchivo, Object object){
         if (nombreArchivo.equalsIgnoreCase("Marcas.txt")) {
-            Marca marca = null;
+            Marca marca = (Marca) object;
             marca = new Marca(marca.getNombre(), marca.getOrigen(), marca.getLogo());
             boolean anexar = false;
             try {
@@ -90,8 +88,8 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 System.out.println("Error al agregar marca!");
                 ex.printStackTrace(System.out);
             }
-        } else if (nombreArchivo.equals("Modelos.txt")) {
-            Modelo modelo = null;
+        } else if (nombreArchivo.equalsIgnoreCase("Modelos.txt")) {
+            Modelo modelo = (Modelo) object;
             modelo = new Modelo(modelo.getTipoVehiculo(),
                                 modelo.getDenominacion(),
                                 modelo.getCantidad());
@@ -99,6 +97,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             try {
                 if (anexar = datos.existe(ARCHIVO_MODELOS)) {
                     this.datos.escribir(modelo, ARCHIVO_MODELOS);
+                    System.out.println("Se agrego un modelo al archivo modelos!");
                 } else {
                     System.out.println("El archivo modelos no existe!");
                 }
@@ -107,7 +106,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 ex.printStackTrace(System.out);
             }
         } else if (nombreArchivo.equalsIgnoreCase("Caracteristicas Tecnicas.txt")) {
-            CaracteristicasTec caracteristica = null;
+            CaracteristicasTec caracteristica = (CaracteristicasTec) object;
             caracteristica = new CaracteristicasTec(caracteristica.getTipoMotor(),
                                                     caracteristica.getCilindros(),
                                                     caracteristica.getCilindrada(),
@@ -121,6 +120,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             try {
                 if (anexar = datos.existe(ARCHIVO_CARACTERISTICAS_TEC)) {
                     this.datos.escribir(caracteristica, ARCHIVO_CARACTERISTICAS_TEC);
+                    System.out.println("Se agrego una caracteristica al archivo caracteristicas tecnicas!");
                 } else {
                     System.out.println("El archivo caracteristicas tecnicas no existe!");
                 }
@@ -129,12 +129,13 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 ex.printStackTrace(System.out);
             }
         } else if (nombreArchivo.equalsIgnoreCase("Distribuidores.txt")) {
-            Distribuidor distribuidor = null;
-            distribuidor = new Distribuidor(distribuidor.getNombreDistribuidor(), ARCHIVO_DISTRIBUIDORES);
+            Distribuidor distribuidor = (Distribuidor) object;
+            distribuidor = new Distribuidor(distribuidor.getNombreDistribuidor(), distribuidor.getPais());
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_DISTRIBUIDORES)) {
                     this.datos.escribir(distribuidor, ARCHIVO_DISTRIBUIDORES);
+                    System.out.println("Se agrego un distribuidor al archivo distribuidores!");
                 } else {
                     System.out.println("El archivo distribuidores no existe!");
                 }
@@ -143,7 +144,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 ex.printStackTrace(System.out);
             }
         } else if (nombreArchivo.equalsIgnoreCase("Agencias.txt")) {
-            Agencia agencia = null;
+            Agencia agencia = (Agencia) object;
             agencia = new Agencia(agencia.getNombreAgencia(),
                                   agencia.getCiudad(),
                                   agencia.getMarcaComercializada());
@@ -151,6 +152,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             try {
                 if (anexar = datos.existe(ARCHIVO_AGENCIAS)) {
                     this.datos.escribir(agencia, ARCHIVO_AGENCIAS);
+                    System.out.println("Se agrego una agencia al archivo agencias!");
                 } else {
                     System.out.println("El archivo agencia no existe!");
                 }
@@ -161,93 +163,11 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         }
     }
 
-//    @Override
-//    public void agregarMarca(String nombreArchivo, String nombre, String origen, String logo) {
-//        Marca marca = new Marca(nombre, origen, logo);
-//        boolean anexar = false;
-//        try {
-//            if (anexar = datos.existe(ARCHIVO_MARCAS)) {
-//                this.datos.escribir(marca, nombreArchivo);
-//            } else {
-//                System.out.println("El archivo Marcas no exixte!");
-//            }
-//        } catch (AccesoDatosEx ex) {
-//            System.out.println("Error al agregar marca!");
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-//    
-//    
-
-//    @Override
-//    public void agregarModelos(String nombreArchivo, String tipoVehiculo, String denominacion, int cantidad) {
-//        Modelo modelo = new Modelo(tipoVehiculo, denominacion, cantidad);
-//        boolean anexar = false;
-//        try {
-//            if (anexar = this.datos.existe(ARCHIVO_MODELOS)) {
-//                this.datos.escribir(modelo, nombreArchivo);
-//            } else {
-//                System.out.println("El archivo Modelos no existe!");
-//            }
-//        } catch (AccesoDatosEx ex) {
-//            System.out.println("Error al agregar marca!");
-//            ex.printStackTrace(System.out);
-//        }
-//
-//    }
-//
-//    @Override
-//    public void agregarCaracteristicasTecnicas(String nombreArchivo, String tipoMotor, String cilindros, 
-//            int cilindrada, int HP, String caja, String equipamiento, String carroceria, 
-//            String id, String modeloDenominacion) {
-//        CaracteristicasTec caracteristica = new CaracteristicasTec(tipoMotor, cilindros, cilindrada, HP, 
-//                caja, equipamiento, carroceria, id, modeloDenominacion);
-//        try {
-//            if (this.datos.existe(ARCHIVO_CARACTERISTICAS_TEC)) {
-//                this.datos.escribir(caracteristica, nombreArchivo);
-//            } else {
-//                System.out.println("El archivo caracteristicas tecnicas no existe!");
-//            }
-//        } catch (AccesoDatosEx ex) {
-//            System.out.println("Error al agregar caracteristicas tecnicas!");
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-//
-//    @Override
-//    public void agregarDistribuidor(String nombreArchivo, String nombreDistribuidor, String pais) {
-//        Distribuidor distribuidor = new Distribuidor(nombreDistribuidor, pais);
-//        try {
-//            if (this.datos.existe(ARCHIVO_DISTRIBUIDORES)) {
-//                this.datos.escribir(distribuidor, nombreArchivo);
-//            } else {
-//                System.out.println("El archivo distribuidores no existe!");
-//            }
-//        } catch (AccesoDatosEx ex) {
-//            System.out.println("Error al agregar distribuidor!");
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-//
-//    @Override
-//    public void agregarAgencia(String nombreArchivo, String nombreAgencia, String ciudad, String marcaComercializada) {
-//        Agencia agencia = new Agencia(nombreAgencia, ciudad, marcaComercializada);
-//        try {
-//            if (this.datos.existe(ARCHIVO_AGENCIAS)) {
-//                this.datos.escribir(agencia, nombreArchivo);
-//            } else {
-//                System.out.println("El archivo agencias no existe!");
-//            }
-//        } catch (AccesoDatosEx ex) {
-//            System.out.println("Error al agregar agencia!");
-//            ex.printStackTrace(System.out);
-//        }
-//    }
-
     @Override
     public void listarArchivo(String nombreArchivo) {
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
+                //Marca marca = (Marca) object;
                 try {
                     List<Marca> marcas = this.datos.listar(this, ARCHIVO_MARCAS);
                 } catch (AccesoDatosEx ex) {
@@ -256,6 +176,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 }
             }              
             case ARCHIVO_MODELOS -> {
+                //Modelo modelo = (Modelo) object;
                 try {
                     List<Modelo> modelos = this.datos.listar(this, ARCHIVO_MODELOS);
                     System.out.println(modelos);
@@ -265,6 +186,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 }
             }
             case ARCHIVO_CARACTERISTICAS_TEC -> {
+                //CaracteristicasTec caracteristica = (CaracteristicasTec) object;
                 try {
                     List<CaracteristicasTec> caracteristicas = this.datos.listar(this, ARCHIVO_CARACTERISTICAS_TEC);
                     System.out.println(caracteristicas);
@@ -274,6 +196,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 }
             }
             case ARCHIVO_DISTRIBUIDORES -> {
+                //Distribuidor distribuidor = (Distribuidor) object;
                 try {
                     List<Distribuidor> distribuidores = this.datos.listar(this, ARCHIVO_DISTRIBUIDORES);
                     System.out.println(distribuidores);
@@ -283,6 +206,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 }
             }
             case ARCHIVO_AGENCIAS -> {
+                //Agencia agencia = (Agencia) object;
                 try {
                     List<Agencia> agencias = this.datos.listar(this, ARCHIVO_AGENCIAS);
                     System.out.println(agencias);

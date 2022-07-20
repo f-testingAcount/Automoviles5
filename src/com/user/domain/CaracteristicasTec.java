@@ -108,8 +108,6 @@ public class CaracteristicasTec {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-//        sb.append("Modelo: ").append(denominacion);
-        //sb.append("Caracteristicas Tecnicas: ");
         sb.append(" | Modelo: ").append(modeloDenominacion);
         sb.append(" | TipoMotor: ").append(tipoMotor);
         sb.append(" | Cilindros: ").append(cilindros);

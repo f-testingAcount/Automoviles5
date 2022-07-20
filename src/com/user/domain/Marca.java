@@ -49,7 +49,6 @@ public class Marca {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        //sb.append("Marca: ");
         sb.append("Nombre: ").append(nombre);
         sb.append(" | Origen: ").append(origen);
         sb.append(" | Logo: ").append(logo);
