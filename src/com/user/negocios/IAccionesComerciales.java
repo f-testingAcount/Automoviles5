@@ -29,7 +29,7 @@ public interface IAccionesComerciales <T>{
 //    
 //    void agregarAgencia(String nombreArchivo, String nombreAgencia, String ciudad, String marcaComercializada);
     
-    void listarArchivo(String nombreArchivo);
+    void listarArchivo(String nombreArchivo, T object);
     
     void enviarPedidoAFabricante(Marca marca, int unidades);
     
@@ -38,6 +38,12 @@ public interface IAccionesComerciales <T>{
     void ingresarAlService(String ID);
     
     void enviarUnidadesAAgencia(Marca marca, Modelo modelo);
+    
+    void vincularMarcaModelo(Marca marca, Modelo modelo);
+    
+    void vincularModeloCaracteristicasTec(Modelo modelo, CaracteristicasTec caracteristica);
+    
+    void buscarInfo(String nombreArchivo, T object);
     
     void borrarArchivo(String nombreArchivo);
             

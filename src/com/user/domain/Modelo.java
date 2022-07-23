@@ -76,6 +76,7 @@ public class Modelo {
         sb.append(" | Denominacion: ").append(denominacion);
         sb.append(" | Cantidad: ").append(cantidad);
         sb.append(" -");
+        sb.append("\n");
         return sb.toString();
     }
            

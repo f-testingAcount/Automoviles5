@@ -19,7 +19,8 @@ public class CaracteristicasTec {
         this.id = id;
     }
 
-    public CaracteristicasTec(String tipoMotor, String cilindros, int cilindrada, int HP, String caja, String equipamiento, String carroceria, String id, String modeloDenominacion) {
+    public CaracteristicasTec(String modeloDenominacion, String tipoMotor, String cilindros, int cilindrada, int HP, String caja, String equipamiento, String carroceria, String id) {
+        this.modeloDenominacion = modeloDenominacion;
         this.tipoMotor = tipoMotor;
         this.cilindros = cilindros;
         this.cilindrada = cilindrada;
@@ -28,7 +29,6 @@ public class CaracteristicasTec {
         this.equipamiento = equipamiento;
         this.carroceria = carroceria;
         this.id = id;
-        this.modeloDenominacion = modeloDenominacion;
     }
         
     public String getTipoMotor() {
@@ -108,7 +108,7 @@ public class CaracteristicasTec {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" | Modelo: ").append(modeloDenominacion);
+        sb.append("Modelo: ").append(modeloDenominacion);
         sb.append(" | TipoMotor: ").append(tipoMotor);
         sb.append(" | Cilindros: ").append(cilindros);
         sb.append(" | Cilindrada: ").append(cilindrada);
@@ -118,6 +118,7 @@ public class CaracteristicasTec {
         sb.append(" | Carroceria: ").append(carroceria);
         sb.append(" | id: ").append(id);
         sb.append(" -");
+        sb.append("\n");
         return sb.toString();
     }
 

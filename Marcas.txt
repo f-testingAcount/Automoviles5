@@ -1,2 +1,4 @@
 Nombre: Ferrari | Origen: Italia | Logo: Cavallino Rampante -
 Nombre: Lamborghini | Origen: Italia | Logo: Toro -
+Nombre: Porsche | Origen: Alemania | Logo: Escudo -
+Nombre: Bugatti | Origen: Francia | Logo: Ovalo con nombre -

@@ -32,7 +32,6 @@ public class Ejecutable {
 
         do {
             System.out.println("""
-                               
                                Ingrese una opcion:
                                1  - Iniciar archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
                                2  - Agregar datos a uno de los archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
@@ -44,11 +43,13 @@ public class Ejecutable {
                                8  - Listar Caracteristicas Tecnicas
                                9  - Listar Distribuidores
                                10 - Listar Agencias
-                               11 - Buscar Modelo
-                               12 - Buscar Distribuidor
-                               13 - Buscar Agencia
-                               14 - Borrar Archivo
-                               15 - Test
+                               11 - Buscar Marca
+                               12 - Buscar Modelo
+                               13 - Buscar Caracteristica Tecnica
+                               14 - Buscar Distribuidor
+                               15 - Buscar Agencia
+                               16 - Borrar Archivo
+                               17 - Test
                                0  - Salir
                                """);
 
@@ -69,9 +70,6 @@ public class Ejecutable {
                                         """);
                     seleccion = Integer.parseInt(input.nextLine());
                     switch (seleccion) {
-
-                        //var nombreArchivo = inputString.nextLine();
-                        //if (null != nombreArchivo) 
                         case 1 -> {
                             String nombreArchivo = "Marcas.txt";
                             System.out.println("Ingrese el nombre de la marca: ");
@@ -172,58 +170,65 @@ public class Ejecutable {
                 }
 
                 case 4 -> { //Ingresar al service de garantia
-
                 }
 
                 case 5 -> { //Servicio mecanico externo
                 }
 
                 case 6 -> { //Listar Marcas
-                    accion.listarArchivo(ARCHIVO_MARCAS);
+                    accion.listarArchivo(ARCHIVO_MARCAS, marca);
                 }
 
                 case 7 -> {
-                    accion.listarArchivo(ARCHIVO_MODELOS);
+                    accion.listarArchivo(ARCHIVO_MODELOS, modelo);
                 }
 
                 case 8 -> { //Listar Caracteristicas Tecnicas
-                    accion.listarArchivo(ARCHIVO_CARACTERISTICAS_TEC);
+                    accion.listarArchivo(ARCHIVO_CARACTERISTICAS_TEC, caracteristica);
                 }
 
                 case 9 -> { //Listar Distribuidores
-                    accion.listarArchivo(ARCHIVO_DISTRIBUIDORES);
+                    accion.listarArchivo(ARCHIVO_DISTRIBUIDORES, distribuidor);
                 }
 
                 case 10 -> { //Listar Agencias
-                    accion.listarArchivo(ARCHIVO_AGENCIAS);
+                    accion.listarArchivo(ARCHIVO_AGENCIAS, agencia);
+                }
+                
+                case 11 -> { //Buscar Marca
+                    System.out.println("Ingrese el nombre del atributo de la marca: ");
+                    var nombre = inputString.nextLine();
+                    marca.setNombre(nombre);
+                    System.out.println(datos.buscar(ARCHIVO_MARCAS, marca));
+                    
                 }
 
-                case 11 -> { //Buscar Modelo
+                case 12 -> { //Buscar Modelo
                     System.out.println("Ingrese la deniminacion del modelo: ");
                     var denominacion = inputString.nextLine();
-                    System.out.println(datos.buscar(ARCHIVO_MODELOS, modelo.getDenominacion()));
+                    modelo.setDenominacion(denominacion);
+                    System.out.println(datos.buscar(ARCHIVO_MODELOS, modelo));
+                }
+                
+                case 13 -> { //Buscar Caracteristica Tecnica
+                
                 }
 
-                case 12 -> { //Buscar Distribuidor
+                case 14 -> { //Buscar Distribuidor
                     System.out.println("Ingrese el nombre del distribuidor: ");
                     var nombreDistribuidor = inputString.nextLine();
                     System.out.println(datos.buscar(ARCHIVO_DISTRIBUIDORES, distribuidor.getNombreDistribuidor()));
                 }
 
-                case 13 -> { //Buscar Agencia
+                case 15 -> { //Buscar Agencia
                     System.out.println("Ingrese el nombre de la agencia: ");
                     var nombreAgencia = inputString.nextLine();
                     System.out.println(datos.buscar(ARCHIVO_AGENCIAS, agencia.getNombreAgencia()));
                 }
 
-                case 14 -> { //Borrar Archivo
-//                    System.out.println("Ingrese el nombre del archivo a eliminar: ");
-//                    var nombreArchivo = inputString.nextLine();
-//                    accion.borrarArchivo(nombreArchivo);
-//                    System.out.println("El archivo " + nombreArchivo + " ha sido borrado!");
+                case 16 -> { //Borrar Archivo
                     var seleccion = 0;
                     System.out.println(""" 
-                                       
                                         Ingrese el nombre del archivo: 
                                         1 - Marcas.txt
                                         2 - Modelos.txt
@@ -231,7 +236,9 @@ public class Ejecutable {
                                         4 - Distribuidores.txt
                                         5 - Agencias.txt
                                         """);
+                    
                     seleccion = Integer.parseInt(input.nextLine());
+                    
                     switch (seleccion){
                         case 1 -> {
                             accion.borrarArchivo(ARCHIVO_MARCAS);
@@ -257,7 +264,7 @@ public class Ejecutable {
                     }
                 }
 
-                case 15 -> { //Testeo
+                case 17 -> { //Testeo
                 }
                 
                 case 0 -> { //Salir

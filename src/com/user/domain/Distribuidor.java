@@ -44,6 +44,7 @@ public class Distribuidor {
         sb.append("Nombre: ").append(nombreDistribuidor);
         sb.append(" | Pais: ").append(pais);
         sb.append(" -");
+        sb.append("\n");
         return sb.toString();
     }
 }

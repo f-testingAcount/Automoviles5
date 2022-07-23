@@ -107,15 +107,16 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             }
         } else if (nombreArchivo.equalsIgnoreCase("Caracteristicas Tecnicas.txt")) {
             CaracteristicasTec caracteristica = (CaracteristicasTec) object;
-            caracteristica = new CaracteristicasTec(caracteristica.getTipoMotor(),
+            caracteristica = new CaracteristicasTec(caracteristica.getModeloDenominacion(),
+                                                    caracteristica.getTipoMotor(),
                                                     caracteristica.getCilindros(),
                                                     caracteristica.getCilindrada(),
                                                     caracteristica.getHP(),
                                                     caracteristica.getCaja(),
                                                     caracteristica.getEquipamiento(),
                                                     caracteristica.getCarroceria(),
-                                                    caracteristica.getId(),
-                                                    caracteristica.getModeloDenominacion());
+                                                    caracteristica.getId());
+                                                    
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_CARACTERISTICAS_TEC)) {
@@ -164,52 +165,63 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     }
 
     @Override
-    public void listarArchivo(String nombreArchivo) {
+    public void listarArchivo(String nombreArchivo, Object object) {
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
-                //Marca marca = (Marca) object;
+                Marca marca = (Marca) object;
                 try {
-                    List<Marca> marcas = this.datos.listar(this, ARCHIVO_MARCAS);
+                    List<Marca> marcas = this.datos.listar(marca, ARCHIVO_MARCAS);
+                    for (Marca detalle : marcas) {
+                        System.out.println("Marca: " + detalle);
+                    }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar marcas!");
                     ex.printStackTrace(System.out);
                 }
             }              
             case ARCHIVO_MODELOS -> {
-                //Modelo modelo = (Modelo) object;
+                Modelo modelo = (Modelo) object;
                 try {
-                    List<Modelo> modelos = this.datos.listar(this, ARCHIVO_MODELOS);
-                    System.out.println(modelos);
+                    List<Modelo> modelos = this.datos.listar(modelo, ARCHIVO_MODELOS);
+                    for (Modelo detalle : modelos) {
+                        System.out.println("Modelo: = " + detalle);
+                    }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar modelos!");
                     ex.printStackTrace(System.out);
                 }
             }
             case ARCHIVO_CARACTERISTICAS_TEC -> {
-                //CaracteristicasTec caracteristica = (CaracteristicasTec) object;
+                CaracteristicasTec caracteristica = (CaracteristicasTec) object;
                 try {
-                    List<CaracteristicasTec> caracteristicas = this.datos.listar(this, ARCHIVO_CARACTERISTICAS_TEC);
-                    System.out.println(caracteristicas);
+                    List<CaracteristicasTec> caracteristicas = this.datos.listar(caracteristica, ARCHIVO_CARACTERISTICAS_TEC);
+                    for (CaracteristicasTec detalle : caracteristicas) {
+                        System.out.println("Caracteristica :" + detalle);
+                    }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar caracteristicas tecnicas!");
                     ex.printStackTrace(System.out);
                 }
             }
             case ARCHIVO_DISTRIBUIDORES -> {
-                //Distribuidor distribuidor = (Distribuidor) object;
+                Distribuidor distribuidor = (Distribuidor) object;
                 try {
-                    List<Distribuidor> distribuidores = this.datos.listar(this, ARCHIVO_DISTRIBUIDORES);
-                    System.out.println(distribuidores);
+                    List<Distribuidor> distribuidores = this.datos.listar(distribuidor, ARCHIVO_DISTRIBUIDORES);
+                    for (Distribuidor detalle : distribuidores) {
+                        System.out.println("Distibuidor: " + detalle);
+                    }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar distribuidores!");
                     ex.printStackTrace(System.out);
                 }
             }
             case ARCHIVO_AGENCIAS -> {
-                //Agencia agencia = (Agencia) object;
+                Agencia agencia = (Agencia) object;
                 try {
-                    List<Agencia> agencias = this.datos.listar(this, ARCHIVO_AGENCIAS);
-                    System.out.println(agencias);
+                    List<Agencia> agencias = this.datos.listar(agencia, ARCHIVO_AGENCIAS);
+                    for (Agencia detalle : agencias) {
+                        System.out.println("Agencia: " + detalle);
+                    }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar agencias!");
                     ex.printStackTrace(System.out);
@@ -218,6 +230,14 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             default -> {
                 System.out.println("El archivo no pertenece a esta lista!");
             }
+        }
+    }
+    
+    @Override
+    public void buscarInfo(String nombreArchivo, Object object0) {
+        if (nombreArchivo.equals(ARCHIVO_MARCAS)) {
+           
+            
         }
     }
 
@@ -251,6 +271,16 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
 
     @Override
     public void enviarUnidadesAAgencia(Marca marca, Modelo modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+     @Override
+    public void vincularMarcaModelo(Marca marca, Modelo modelo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void vincularModeloCaracteristicasTec(Modelo modelo, CaracteristicasTec caracteristica) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
