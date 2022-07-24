@@ -438,12 +438,12 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     String linea = search.readLine();
                     while (linea != null) {
                         linea = linea.substring(8);
-                        String nombreDistribuidor = linea.substring(0, linea.indexOf(" "));
+                        String nombreDistribuidor = linea.substring(0, linea.indexOf(" | "));
                         String pais = linea.substring(linea.indexOf("Pais:") + 6, linea.indexOf(" -"));
                         Distribuidor datos = new Distribuidor(nombreDistribuidor, pais);
                         distribuidores.add(datos);
                         if (distribuidor.getNombreDistribuidor() != null && distribuidor.getNombreDistribuidor().equalsIgnoreCase(datos.getNombreDistribuidor())) {
-                            object = "El distribuidor " + distribuidor.getNombreDistribuidor() + " se localiza en el indice " + indice + " y se localiza en " + datos.getPais();
+                            object = "El distribuidor " + distribuidor.getNombreDistribuidor() + " se encuentra en el indice " + indice + " y se localiza en " + datos.getPais();
                             break;
                         }
                         indice++;
@@ -468,15 +468,15 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     String linea = search.readLine();
                     while (linea != null) {
                         linea = linea.substring(8);
-                        String nombreAgencia = linea.substring(0, linea.indexOf(" "));
+                        String nombreAgencia = linea.substring(0, linea.indexOf(" | "));
                         String ciudad = linea.substring(linea.indexOf("Ciudad:") + 8, linea.indexOf(" | Marca:"));
                         String marcaComercializada = linea.substring(linea.indexOf("Marca:") + 7, linea.indexOf(" -"));
                         Agencia datos = new Agencia(nombreAgencia, ciudad, marcaComercializada);
                         agencias.add(datos);
                         if (agencia.getNombreAgencia() != null && agencia.getNombreAgencia().equalsIgnoreCase(datos.getNombreAgencia())) {
-                            object = "La agencia " + agencia.getNombreAgencia() + " que se encuentra en el indice " 
-                                    + indice + " se localiza en la ciudad de " + datos.getCiudad() 
-                                    + " comercializa la marca " + datos.getMarcaComercializada();
+                            object = "La agencia " + datos.getNombreAgencia() + " que se encuentra en el indice " 
+                                    + indice + ", se localiza en la ciudad de " + datos.getCiudad() 
+                                    + " y comercializa la marca " + datos.getMarcaComercializada();
                             break;
                         }
                         indice++;
