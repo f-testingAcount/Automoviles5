@@ -32,7 +32,7 @@ public class Ejecutable {
 
         do {
             System.out.println("""
-                               Ingrese una opcion:
+                               \nIngrese una opcion:
                                1  - Iniciar archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
                                2  - Agregar datos a uno de los archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
                                3  - Vender Vehiculo
@@ -196,9 +196,9 @@ public class Ejecutable {
                 }
                 
                 case 11 -> { //Buscar Marca
-                    System.out.println("Ingrese el nombre del atributo de la marca: ");
+                    System.out.println("Ingrese el nombre de la marca a buscar:");
                     var nombre = inputString.nextLine();
-                    marca.setNombre(nombre);
+                    marca.setNombre(nombre);                    
                     System.out.println(datos.buscar(ARCHIVO_MARCAS, marca));
                     
                 }
@@ -211,19 +211,24 @@ public class Ejecutable {
                 }
                 
                 case 13 -> { //Buscar Caracteristica Tecnica
-                
+                    System.out.println("Ingrese la deniminacion del modelo del cual desea saber las caracteristicas: ");
+                    var modeloDenominacion = inputString.nextLine();
+                    caracteristica.setModeloDenominacion(modeloDenominacion);
+                    System.out.println(datos.buscar(ARCHIVO_CARACTERISTICAS_TEC, caracteristica));
                 }
 
                 case 14 -> { //Buscar Distribuidor
                     System.out.println("Ingrese el nombre del distribuidor: ");
                     var nombreDistribuidor = inputString.nextLine();
-                    System.out.println(datos.buscar(ARCHIVO_DISTRIBUIDORES, distribuidor.getNombreDistribuidor()));
+                    distribuidor.setNombreDistribuidor(nombreDistribuidor);
+                    System.out.println(datos.buscar(ARCHIVO_DISTRIBUIDORES, distribuidor));
                 }
 
                 case 15 -> { //Buscar Agencia
                     System.out.println("Ingrese el nombre de la agencia: ");
                     var nombreAgencia = inputString.nextLine();
-                    System.out.println(datos.buscar(ARCHIVO_AGENCIAS, agencia.getNombreAgencia()));
+                    agencia.setNombreAgencia(nombreAgencia);
+                    System.out.println(datos.buscar(ARCHIVO_AGENCIAS, agencia));
                 }
 
                 case 16 -> { //Borrar Archivo

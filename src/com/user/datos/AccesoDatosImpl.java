@@ -186,7 +186,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String tipoVehiculo = linea.substring(0, linea.indexOf(" "));
                         String denominacion = linea.substring(linea.indexOf("Denominacion:") + 14, linea.indexOf(" | Cantidad:"));
                         String cantidad = linea.substring(linea.indexOf("Cantidad:") + 10, linea.indexOf(" -"));                     
-                        modelo = new Modelo(tipoVehiculo, denominacion, modelo.getCantidad());
+                        modelo = new Modelo(tipoVehiculo, denominacion, Integer.valueOf(cantidad));
                         modelos.add(modelo);
                         linea = leer.readLine();
                     }
@@ -217,8 +217,8 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String equipamiento = linea.substring(linea.indexOf("Equipamiento:") + 14, linea.indexOf(" | Carroceria"));
                         String carroceria = linea.substring(linea.indexOf("Carroceria:") + 12, linea.indexOf(" | id"));
                         String id = linea.substring(linea.indexOf("id:") + 4, linea.indexOf(" -"));
-                        caracteristica =  new CaracteristicasTec(modeloDenominacion, tipoMotor, cilindros, caracteristica.getCilindrada(),
-                                                                 caracteristica.getHP(), caja, equipamiento, carroceria, id);
+                        caracteristica =  new CaracteristicasTec(modeloDenominacion, tipoMotor, cilindros, Integer.valueOf(cilindrada),
+                                                                 Integer.valueOf(hp), caja, equipamiento, carroceria, id);
                         caracteristicas.add(caracteristica);
                         linea = leer.readLine();
                     }
@@ -291,31 +291,56 @@ public class AccesoDatosImpl implements IAccesoDatos {
         switch (nombreArchivo) {
             case ARCHIVO_MARCAS -> {
                 Marca marca = (Marca) object;
-                marca = new Marca();
+                //marca = new Marca();
                 List<Marca> marcas = new ArrayList<>();
+                //busqueda = "";
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
-                    
                     while (linea != null) {
-                        if ((marca.getNombre() != null && linea.contains(marca.getNombre()))
-//                        || (marca.getOrigen() != null && linea.contains(marca.getOrigen()))
-//                        || (marca.getLogo() != null && linea.contains(marca.getLogo()))
-                                ) 
-                                
-                                {
-                            //System.out.println("Se ha localizado la marca " + marca + " en el indice " + indice);
-                            linea = linea.substring(8);
-                            String nombre = linea.substring(0, linea.indexOf(" "));
-                            String origen = linea.substring(linea.indexOf("Origen:") + 8, linea.indexOf(" | Logo"));
-                            String logo = linea.substring(linea.indexOf("Logo:") + 6, linea.indexOf(" -"));
-                            Marca marca1 = new Marca(nombre, origen, logo);
-                            marcas.add(marca1);
-                            break;
-                        }
+                        linea = linea.substring(8);
+                        String nombre = linea.substring(0, linea.indexOf(" "));
+                        String origen = linea.substring(linea.indexOf("Origen:") + 8, linea.indexOf(" | Logo"));
+                        String logo = linea.substring(linea.indexOf("Logo:") + 6, linea.indexOf(" -"));
+                        Marca datos = new Marca(nombre, origen, logo);
+                        marcas.add(datos);
+                        //for (int i = 0; i < marcas.size(); i++) {
+//                            if (marca.getNombre() != null && linea.contains(marca.getNombre())) {
+                            if (marca.getNombre() != null && marca.getNombre().equalsIgnoreCase(datos.getNombre())) {
+                                object = "La marca " + marca.getNombre() + " se encuentra en el indice "
+                                        + indice + " es de origen " + datos.getOrigen() + " y el logo es " + datos.getLogo();
+                                break;
+                            }    
+                            //break;
+//                        } else if(busqueda.equalsIgnoreCase(origen)){
+//                            busqueda = "El origen de la marca " + nombre + " es: " + origen + " y se encuentra en el idice " + indice;
+//                            break;
+//                        } else if (busqueda.equalsIgnoreCase(logo)) {
+//                            busqueda = "El logo de la marca " + nombre + " es: " + logo + " y se localiza en el indice " + indice;
+//                            break;
+                        
                         indice++;
                         linea = search.readLine();
+                        
+//                        Marca datos = new Marca(nombre, origen, logo);
+//                        marcas.add(datos);                        
+//                        if ((marca.getNombre() != null && linea.contains(marca.getNombre()))
+////                        || (marca.getOrigen() != null && linea.contains(marca.getOrigen()))
+////                        || (marca.getLogo() != null && linea.contains(marca.getLogo()))
+//                                ){
+//                            //System.out.println("Se ha localizado la marca " + marca + " en el indice " + indice);
+//                            linea = linea.substring(8);
+//                            String nombre = linea.substring(0, linea.indexOf(" "));
+//                            String origen = linea.substring(linea.indexOf("Origen:") + 8, linea.indexOf(" | Logo"));
+//                            String logo = linea.substring(linea.indexOf("Logo:") + 6, linea.indexOf(" -"));
+//                            Marca datos = new Marca(nombre, origen, logo);
+//                            marcas.add(datos);
+//                            
+//                            break;
+//                        }
+//                        indice++;
+//                        linea = search.readLine();
                     }
                     search.close();
                 } catch (FileNotFoundException ex) {
@@ -325,18 +350,25 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     ex.printStackTrace(System.out);
                     throw new AccesoDatosEx("Error al buscar en el archivo marcas!" + ex.getMessage());
                 }
-                return marcas;
+                return object;
             }
             case IAccionesComerciales.ARCHIVO_MODELOS -> {
                 Modelo modelo = (Modelo) object;
-                modelo = new Modelo();
+                List<Modelo> modelos = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
                     while (linea != null) {
-                        if (modelo.getDenominacion() != null && modelo.getDenominacion().equalsIgnoreCase(linea)) {
-                            System.out.println("Se ha localizado el modelo " + modelo + " en la linea " + indice);
+                        linea = linea.substring(18);
+                        String tipoVehiculo = linea.substring(0, linea.indexOf(" "));
+                        String denominacion = linea.substring(linea.indexOf("Denominacion:") + 14, linea.indexOf(" | Cantidad:"));
+                        String cantidad = linea.substring(linea.indexOf("Cantidad:") + 10, linea.indexOf(" -"));
+                        Modelo datos = new Modelo(tipoVehiculo, denominacion, Integer.valueOf(cantidad));
+                        modelos.add(datos);
+                        if (modelo.getDenominacion() != null && modelo.getDenominacion().equalsIgnoreCase(datos.getDenominacion())) {
+                            object = "Se ha localizado el modelo " + datos.getDenominacion() + " en la linea " 
+                                      + indice + " y hay en stock " + datos.getCantidad() + " unidades";
                             break;
                         }
                         indice++;
@@ -350,20 +382,38 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     ex.printStackTrace(System.out);
                     throw new AccesoDatosEx("Error al buscar en el archivo modelos!" + ex.getMessage());
                 }
-                return modelo.getDenominacion();
+                return object;
             }
             case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC -> {
                 CaracteristicasTec caracteristica = (CaracteristicasTec) object;
-                caracteristica = new CaracteristicasTec();
-                Modelo modelo = new Modelo();
-                String detalle = null;
+                List<CaracteristicasTec> caracteristicas = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
                     while (linea != null) {
-                        if (caracteristica.getModeloDenominacion() != null && caracteristica.getModeloDenominacion().equalsIgnoreCase(linea)) {
-                            detalle = "Las caracteristicas del modelo " + modelo.getDenominacion() + " son: " + modelo.getCaracteristicas();
+                        linea = linea.substring(8);
+                        String modeloDenominacion = linea.substring(0, linea.indexOf(" "));
+                        String tipoMotor = linea.substring(linea.indexOf("TipoMotor:") + 11, linea.indexOf(" | Cilindros:"));
+                        String cilindros = linea.substring(linea.indexOf("Cilindros:") + 11, linea.indexOf(" | Cilindrada:"));
+                        String cilindrada = linea.substring(linea.indexOf("Cilindrada:") + 12, linea.indexOf(" | HP:"));
+                        String HP = linea.substring(linea.indexOf("HP:") + 4, linea.indexOf(" | Caja:"));
+                        String caja = linea.substring(linea.indexOf("Caja:") + 6, linea.indexOf(" | Equipamiento:"));
+                        String equipamiento = linea.substring(linea.indexOf("Equipamiento:") + 14, linea.indexOf(" | Carroceria:"));
+                        String carroceria = linea.substring(linea.indexOf("Carroceria:") + 12, linea.indexOf(" | id:"));
+                        String id = linea.substring(linea.indexOf("id:") + 4, linea.indexOf(" -"));
+                        CaracteristicasTec detalle = new CaracteristicasTec(modeloDenominacion, tipoMotor, cilindros, Integer.valueOf(cilindrada), Integer.valueOf(HP), caja, equipamiento, carroceria, id);
+                        caracteristicas.add(detalle);
+                        if (caracteristica.getModeloDenominacion() != null && caracteristica.getModeloDenominacion().equalsIgnoreCase(detalle.getModeloDenominacion())) {
+                            object = "El modelo " + caracteristica.getModeloDenominacion() + " que se encuentra en el indice " + indice + " tiene las siguientes caracteristicas: " 
+                                    + detalle.getTipoMotor() + " | " 
+                                    + detalle.getCilindros() + " | " 
+                                    + detalle.getCilindrada() + " | " 
+                                    + detalle.getHP() + " | " 
+                                    + detalle.getCaja() + " | " 
+                                    + detalle.getEquipamiento() + " | " 
+                                    + detalle.getCarroceria() + " | " 
+                                    + detalle.getId();
                             break;
                         }
                         indice++;
@@ -377,17 +427,23 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     ex.printStackTrace(System.out);
                     throw new AccesoDatosEx("Error al buscar en el archivo caracteristicas tecnicas!" + ex.getMessage());
                 }
-                return detalle;
+                return object;
             }
             case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES -> {
                 Distribuidor distribuidor = (Distribuidor) object;
-                distribuidor = new Distribuidor();
+                List<Distribuidor> distribuidores = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
                     while (linea != null) {
-                        if (distribuidor.getNombreDistribuidor() != null && distribuidor.getNombreDistribuidor().equalsIgnoreCase(linea)) {
+                        linea = linea.substring(8);
+                        String nombreDistribuidor = linea.substring(0, linea.indexOf(" "));
+                        String pais = linea.substring(linea.indexOf("Pais:") + 6, linea.indexOf(" -"));
+                        Distribuidor datos = new Distribuidor(nombreDistribuidor, pais);
+                        distribuidores.add(datos);
+                        if (distribuidor.getNombreDistribuidor() != null && distribuidor.getNombreDistribuidor().equalsIgnoreCase(datos.getNombreDistribuidor())) {
+                            object = "El distribuidor " + distribuidor.getNombreDistribuidor() + " se localiza en el indice " + indice + " y se localiza en " + datos.getPais();
                             break;
                         }
                         indice++;
@@ -401,17 +457,26 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     ex.printStackTrace(System.out);
                     throw new AccesoDatosEx("Error al buscar en el archivo modelos!" + ex.getMessage());
                 }
-                return distribuidor.getNombreDistribuidor();
+                return object;
             }
             case IAccionesComerciales.ARCHIVO_AGENCIAS -> {
                 Agencia agencia = (Agencia) object;
-                agencia = new Agencia();
+                List<Agencia> agencias = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
                     while (linea != null) {
-                        if (agencia.getNombreAgencia() != null && agencia.getNombreAgencia().equalsIgnoreCase(linea)) {
+                        linea = linea.substring(8);
+                        String nombreAgencia = linea.substring(0, linea.indexOf(" "));
+                        String ciudad = linea.substring(linea.indexOf("Ciudad:") + 8, linea.indexOf(" | Marca:"));
+                        String marcaComercializada = linea.substring(linea.indexOf("Marca:") + 7, linea.indexOf(" -"));
+                        Agencia datos = new Agencia(nombreAgencia, ciudad, marcaComercializada);
+                        agencias.add(datos);
+                        if (agencia.getNombreAgencia() != null && agencia.getNombreAgencia().equalsIgnoreCase(datos.getNombreAgencia())) {
+                            object = "La agencia " + agencia.getNombreAgencia() + " que se encuentra en el indice " 
+                                    + indice + " se localiza en la ciudad de " + datos.getCiudad() 
+                                    + " comercializa la marca " + datos.getMarcaComercializada();
                             break;
                         }
                         indice++;
@@ -425,7 +490,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     ex.printStackTrace(System.out);
                     throw new AccesoDatosEx("Error al buscar en el archivo modelos!" + ex.getMessage());
                 }
-                return agencia.getNombreAgencia();
+                return object;
             }
             default -> {
                 System.out.println("La opcion ingresada no exitste, ingrese una opcion valida!");

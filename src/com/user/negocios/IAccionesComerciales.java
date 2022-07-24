@@ -43,7 +43,7 @@ public interface IAccionesComerciales <T>{
     
     void vincularModeloCaracteristicasTec(Modelo modelo, CaracteristicasTec caracteristica);
     
-    void buscarInfo(String nombreArchivo, T object);
+//    void buscarInfo(String nombreArchivo, String dato);
     
     void borrarArchivo(String nombreArchivo);
             

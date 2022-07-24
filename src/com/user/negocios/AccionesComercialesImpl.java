@@ -5,6 +5,8 @@ import com.user.domain.*;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AccionesComercialesImpl implements IAccionesComerciales {
@@ -196,7 +198,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 try {
                     List<CaracteristicasTec> caracteristicas = this.datos.listar(caracteristica, ARCHIVO_CARACTERISTICAS_TEC);
                     for (CaracteristicasTec detalle : caracteristicas) {
-                        System.out.println("Caracteristica :" + detalle);
+                        System.out.println("Caracteristica: " + detalle);
                     }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar caracteristicas tecnicas!");
@@ -233,13 +235,36 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         }
     }
     
-    @Override
-    public void buscarInfo(String nombreArchivo, Object object0) {
-        if (nombreArchivo.equals(ARCHIVO_MARCAS)) {
-           
-            
-        }
-    }
+//    @Override
+//    public void buscarInfo(String nombreArchivo, String dato) {
+//        if (nombreArchivo.equals(ARCHIVO_MARCAS)) {
+//            Marca marca = new Marca();
+//            String busqueda = null;
+            //try {
+//                busqueda = (String) this.datos.buscar(ARCHIVO_MARCAS, marca, dato);
+                //Marca marca = (Marca) object;
+                //List<Marca> marcas = (List<Marca>) this.datos.buscar(ARCHIVO_MARCAS, marca);
+                //String linea = null;
+//                for (int i = 0; i < marcas.size(); i++) {                    
+//                    if (marcas.get(i) == linea.equalsIgnoreCase(marca.getNombre()) {
+//                        
+//                    }
+////                }
+//            } catch (AccesoDatosEx ex) {
+//                System.out.println("Error al buscar en marcas!");
+//                ex.printStackTrace(System.out);
+//            }
+//            System.out.println("busqueda finalizada: " + busqueda);         
+//        } else if(nombreArchivo.equalsIgnoreCase(ARCHIVO_MODELOS)){
+//            
+//        } else if (nombreArchivo.equalsIgnoreCase(ARCHIVO_CARACTERISTICAS_TEC)) {
+//            
+//        } else if (nombreArchivo.equalsIgnoreCase(ARCHIVO_DISTRIBUIDORES)) {
+//            
+//        } else if (nombreArchivo.equals(ARCHIVO_AGENCIAS)) {
+//            
+//         }
+//    }
 
     @Override
     public void enviarPedidoAFabricante(Marca marca, int unidades) {
@@ -248,20 +273,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
 
     @Override
     public void venderVehiculo(Modelo modelo) {
-        try {
-            Modelo modeloEncontrado = (Modelo) datos.buscar(ARCHIVO_MODELOS, modelo.getDenominacion());
-            if (modeloEncontrado != null) {
-                modeloEncontrado.setCantidad(modeloEncontrado.getCantidad() - 1);
-                System.out.println("Se ha vendido un vehiculo!");
-                System.out.println("Quedan en stock del modelo " + modelo + " " + modelo.getCantidad());
-            } else {
-                //Pedir stock al fabricante
-                System.out.println("No hay stock del modelo solicitado! Enviar pedido a distribuidor!");
-            }
-        } catch (AccesoDatosEx ex) {
-            System.out.println("Error al vender vehiculo!");
-            ex.printStackTrace(System.out);
-        }
+        
     }
 
     @Override
