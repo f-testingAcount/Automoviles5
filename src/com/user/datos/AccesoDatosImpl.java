@@ -298,6 +298,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
+                    boolean encontrado = false;
                     while (linea != null) {
                         linea = linea.substring(8);
                         String nombre = linea.substring(0, linea.indexOf(" "));
@@ -310,6 +311,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                             if (marca.getNombre() != null && marca.getNombre().equalsIgnoreCase(datos.getNombre())) {
                                 object = "La marca " + marca.getNombre() + " se encuentra en el indice "
                                         + indice + " es de origen " + datos.getOrigen() + " y el logo es " + datos.getLogo();
+                                encontrado = true;
                                 break;
                             }    
                             //break;
@@ -342,6 +344,9 @@ public class AccesoDatosImpl implements IAccesoDatos {
 //                        indice++;
 //                        linea = search.readLine();
                     }
+                    if(marca.getNombre() == null || encontrado == false) {
+                        System.out.println("El marca indicada no esta registrada en este archivo o no existe!, Si desea buscar otra marca inicie nuevamente la busqueda");
+                    }
                     search.close();
                 } catch (FileNotFoundException ex) {
                     ex.printStackTrace(System.out);
@@ -359,6 +364,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
+                    boolean encontrado = false;
                     while (linea != null) {
                         linea = linea.substring(18);
                         String tipoVehiculo = linea.substring(0, linea.indexOf(" "));
@@ -369,10 +375,14 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         if (modelo.getDenominacion() != null && modelo.getDenominacion().equalsIgnoreCase(datos.getDenominacion())) {
                             object = "Se ha localizado el modelo " + datos.getDenominacion() + " en la linea " 
                                       + indice + " y hay en stock " + datos.getCantidad() + " unidades";
+                            encontrado = true;
                             break;
                         }
                         indice++;
                         linea = search.readLine();
+                    }
+                    if(modelo.getDenominacion() == null || encontrado == false) {
+                        System.out.println("El modelo indicado no esta registrada en este achivo o no existe!, Si desea buscar otro modelo inicie nuevamente la busqueda");
                     }
                     search.close();
                 } catch (FileNotFoundException ex) {
@@ -391,6 +401,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
+                    boolean encontrado = false;
                     while (linea != null) {
                         linea = linea.substring(8);
                         String modeloDenominacion = linea.substring(0, linea.indexOf(" "));
@@ -414,10 +425,14 @@ public class AccesoDatosImpl implements IAccesoDatos {
                                     + detalle.getEquipamiento() + " | " 
                                     + detalle.getCarroceria() + " | " 
                                     + detalle.getId();
+                            encontrado = true;
                             break;
-                        }
+                        } 
                         indice++;
                         linea = search.readLine();
+                    }
+                    if(caracteristica.getModeloDenominacion() == null || encontrado == false) {
+                        System.out.println("El modelo indicado esta registrado en este archivo o no existe!, Si desea buscar otro modelo ingreselo nuevamente");
                     }
                     search.close();
                 } catch (FileNotFoundException ex) {
@@ -436,6 +451,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
+                    boolean encontrado = false;
                     while (linea != null) {
                         linea = linea.substring(8);
                         String nombreDistribuidor = linea.substring(0, linea.indexOf(" | "));
@@ -444,10 +460,14 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         distribuidores.add(datos);
                         if (distribuidor.getNombreDistribuidor() != null && distribuidor.getNombreDistribuidor().equalsIgnoreCase(datos.getNombreDistribuidor())) {
                             object = "El distribuidor " + distribuidor.getNombreDistribuidor() + " se encuentra en el indice " + indice + " y se localiza en " + datos.getPais();
+                            encontrado = true;
                             break;
                         }
                         indice++;
                         linea = search.readLine();
+                    }
+                    if(distribuidor.getNombreDistribuidor() == null || encontrado == false) {
+                        System.out.println("El distribuidor indicado no esta registrado en este archivo o no existe!, Si desea buscar otro distribuidor inicie nuevamente la busqueda");
                     }
                     search.close();
                 } catch (FileNotFoundException ex) {
@@ -466,6 +486,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
                     String linea = search.readLine();
+                    boolean encontrado = false;
                     while (linea != null) {
                         linea = linea.substring(8);
                         String nombreAgencia = linea.substring(0, linea.indexOf(" | "));
@@ -477,10 +498,14 @@ public class AccesoDatosImpl implements IAccesoDatos {
                             object = "La agencia " + datos.getNombreAgencia() + " que se encuentra en el indice " 
                                     + indice + ", se localiza en la ciudad de " + datos.getCiudad() 
                                     + " y comercializa la marca " + datos.getMarcaComercializada();
+                            encontrado = true;
                             break;
                         }
                         indice++;
                         linea = search.readLine();
+                    }
+                    if(agencia.getNombreAgencia() == null || encontrado == false) {
+                        System.out.println("La agencia indicada no esta registrada en este archivo o no existe!, Si desea buscar otra agencia inicie nuevamente la busqueda");
                     }
                     search.close();
                 } catch (FileNotFoundException ex) {

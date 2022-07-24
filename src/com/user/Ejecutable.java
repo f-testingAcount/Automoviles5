@@ -157,15 +157,19 @@ public class Ejecutable {
                 }
 
                 case 3 -> { //Vender Vehiculo
-                    System.out.println("Ingrese los datos del modelo: ");
-                    System.out.println("Ingrese el tipo de vehiculo: ");
+                    System.out.println("A continuacion se solicitan los datos que se le solicitan del vehiculo que desea adquirir: ");
+                    System.out.println("Ingrese la marca del vehiculo: ");
+                    var nombre = inputString.nextLine();
+                    marca.setNombre(nombre);
+                    System.out.println("Ingrese el tipo de vehiculo (auto, camioneta, SUV, camion, moto: ");
                     var tipoVehiculo = inputString.nextLine();
-                    System.out.println("Ingrese la denominacion del vehiculo: ");
+                    modelo.setTipoVehiculo(tipoVehiculo);
+                    System.out.println("Ingrese la denominacion del modelo: ");
                     var denominacion = inputString.nextLine();
-                    System.out.println("Ingrese la cantidad de vehiculos en existencia: ");
-                    var cantidad = modelo.getCantidad();
-                    modelo = new Modelo(tipoVehiculo, denominacion, cantidad);
-                    System.out.println("Hay en existencia del modelo " + modelo.getDenominacion() + " " + modelo.getCantidad() + " unidades\n");
+                    modelo.setDenominacion(denominacion);
+                    marca = new Marca(nombre);
+                    modelo = new Modelo(tipoVehiculo, denominacion);
+                    System.out.println("De la marca " + marca.getNombre() + " modelo " + modelo.getDenominacion() + " hay " + modelo.getCantidad() + " unidades\n");
                     accion.venderVehiculo(modelo);
                 }
 
@@ -200,20 +204,20 @@ public class Ejecutable {
                     var nombre = inputString.nextLine();
                     marca.setNombre(nombre);                    
                     System.out.println(datos.buscar(ARCHIVO_MARCAS, marca));
-                    
                 }
 
                 case 12 -> { //Buscar Modelo
                     System.out.println("Ingrese la deniminacion del modelo: ");
                     var denominacion = inputString.nextLine();
                     modelo.setDenominacion(denominacion);
-                    System.out.println(datos.buscar(ARCHIVO_MODELOS, modelo));
+                    System.out.println(datos.buscar(denominacion, opcion));
                 }
                 
                 case 13 -> { //Buscar Caracteristica Tecnica
                     System.out.println("Ingrese la deniminacion del modelo del cual desea saber las caracteristicas: ");
                     var modeloDenominacion = inputString.nextLine();
                     caracteristica.setModeloDenominacion(modeloDenominacion);
+                    
                     System.out.println(datos.buscar(ARCHIVO_CARACTERISTICAS_TEC, caracteristica));
                 }
 
