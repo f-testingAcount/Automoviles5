@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Modelo {
     
-    private String tipoVehiculo; //Auto, camioneta, Moto, camion
+    private String tipoVehiculo; //Auto, camioneta, SUV, Moto, camion
     String denominacion;
     private int cantidad;
     private ArrayList<CaracteristicasTec> caracteristicas = new ArrayList<>();
@@ -14,6 +14,11 @@ public class Modelo {
 
     public Modelo(String denominacion) {
         this.denominacion = denominacion;
+    }
+    
+    public Modelo(String denominacion, int cantidad){
+        this.denominacion = denominacion;
+        this.cantidad = cantidad;
     }
     
     public Modelo(String tipoVehiculo, String denominacion){
@@ -63,10 +68,24 @@ public class Modelo {
         caracteristicas.add(caracteristica);
     }
     
-    public void mostrarCaracteristicas(){
+    public CaracteristicasTec buscarModeloPorID(String id){
+        CaracteristicasTec encontrado = null;
         for (int i = 0; i < caracteristicas.size(); i++) {
-            System.out.println(caracteristicas.get(i));
+            if (id.equalsIgnoreCase(caracteristicas.get(i).getId())) {
+                encontrado = caracteristicas.get(i);
+            }
         }
+        return encontrado;
+    }
+    
+    public CaracteristicasTec buscarModeloPorDenominacion(String denominacion){
+        CaracteristicasTec encontrado = null;
+        for (int i = 0; i < caracteristicas.size(); i++) {
+            if (denominacion.equalsIgnoreCase(caracteristicas.get(i).getId())) {
+                encontrado = caracteristicas.get(i);
+            }
+        }
+        return encontrado;
     }
     
     @Override

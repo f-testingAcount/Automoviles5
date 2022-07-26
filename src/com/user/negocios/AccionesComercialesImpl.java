@@ -5,8 +5,6 @@ import com.user.domain.*;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class AccionesComercialesImpl implements IAccionesComerciales {
@@ -72,9 +70,9 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             ex.printStackTrace(System.out);
         }
     }
-    
+
     @Override
-    public void agregar(String nombreArchivo, Object object){
+    public void agregar(String nombreArchivo, Object object) {
         if (nombreArchivo.equalsIgnoreCase("Marcas.txt")) {
             Marca marca = (Marca) object;
             marca = new Marca(marca.getNombre(), marca.getOrigen(), marca.getLogo());
@@ -93,8 +91,8 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         } else if (nombreArchivo.equalsIgnoreCase("Modelos.txt")) {
             Modelo modelo = (Modelo) object;
             modelo = new Modelo(modelo.getTipoVehiculo(),
-                                modelo.getDenominacion(),
-                                modelo.getCantidad());
+                    modelo.getDenominacion(),
+                    modelo.getCantidad());
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_MODELOS)) {
@@ -110,15 +108,15 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         } else if (nombreArchivo.equalsIgnoreCase("Caracteristicas Tecnicas.txt")) {
             CaracteristicasTec caracteristica = (CaracteristicasTec) object;
             caracteristica = new CaracteristicasTec(caracteristica.getModeloDenominacion(),
-                                                    caracteristica.getTipoMotor(),
-                                                    caracteristica.getCilindros(),
-                                                    caracteristica.getCilindrada(),
-                                                    caracteristica.getHP(),
-                                                    caracteristica.getCaja(),
-                                                    caracteristica.getEquipamiento(),
-                                                    caracteristica.getCarroceria(),
-                                                    caracteristica.getId());
-                                                    
+                    caracteristica.getTipoMotor(),
+                    caracteristica.getCilindros(),
+                    caracteristica.getCilindrada(),
+                    caracteristica.getHP(),
+                    caracteristica.getCaja(),
+                    caracteristica.getEquipamiento(),
+                    caracteristica.getCarroceria(),
+                    caracteristica.getId());
+
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_CARACTERISTICAS_TEC)) {
@@ -149,8 +147,8 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
         } else if (nombreArchivo.equalsIgnoreCase("Agencias.txt")) {
             Agencia agencia = (Agencia) object;
             agencia = new Agencia(agencia.getNombreAgencia(),
-                                  agencia.getCiudad(),
-                                  agencia.getMarcaComercializada());
+                    agencia.getCiudad(),
+                    agencia.getMarcaComercializada());
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_AGENCIAS)) {
@@ -162,7 +160,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             } catch (AccesoDatosEx ex) {
                 System.out.println("Error al agregar agencia!");
                 ex.printStackTrace(System.out);
-            }            
+            }
         }
     }
 
@@ -180,7 +178,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                     System.out.println("Error al listar marcas!");
                     ex.printStackTrace(System.out);
                 }
-            }              
+            }
             case ARCHIVO_MODELOS -> {
                 Modelo modelo = (Modelo) object;
                 try {
@@ -234,37 +232,16 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             }
         }
     }
-    
-//    @Override
-//    public void buscarInfo(String nombreArchivo, String dato) {
-//        if (nombreArchivo.equals(ARCHIVO_MARCAS)) {
-//            Marca marca = new Marca();
-//            String busqueda = null;
-            //try {
-//                busqueda = (String) this.datos.buscar(ARCHIVO_MARCAS, marca, dato);
-                //Marca marca = (Marca) object;
-                //List<Marca> marcas = (List<Marca>) this.datos.buscar(ARCHIVO_MARCAS, marca);
-                //String linea = null;
-//                for (int i = 0; i < marcas.size(); i++) {                    
-//                    if (marcas.get(i) == linea.equalsIgnoreCase(marca.getNombre()) {
-//                        
-//                    }
-////                }
-//            } catch (AccesoDatosEx ex) {
-//                System.out.println("Error al buscar en marcas!");
-//                ex.printStackTrace(System.out);
-//            }
-//            System.out.println("busqueda finalizada: " + busqueda);         
-//        } else if(nombreArchivo.equalsIgnoreCase(ARCHIVO_MODELOS)){
-//            
-//        } else if (nombreArchivo.equalsIgnoreCase(ARCHIVO_CARACTERISTICAS_TEC)) {
-//            
-//        } else if (nombreArchivo.equalsIgnoreCase(ARCHIVO_DISTRIBUIDORES)) {
-//            
-//        } else if (nombreArchivo.equals(ARCHIVO_AGENCIAS)) {
-//            
-//         }
-//    }
+
+    @Override
+    public Integer stock(String nombreArchivo, String nombreMarca, String denominacionModelo) {
+        Integer stock = 0;
+        switch (nombreArchivo) {
+            case ARCHIVO_MARCAS -> {
+            }
+        }
+        return stock;
+    }
 
     @Override
     public void enviarPedidoAFabricante(Marca marca, int unidades) {
@@ -272,8 +249,8 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     }
 
     @Override
-    public void venderVehiculo(Modelo modelo) {
-        
+    public void venderVehiculo(Marca marca, Modelo modelo, CaracteristicasTec caracteristicas, boolean stock) {
+
     }
 
     @Override
@@ -285,8 +262,8 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     public void enviarUnidadesAAgencia(Marca marca, Modelo modelo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-     @Override
+
+    @Override
     public void vincularMarcaModelo(Marca marca, Modelo modelo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

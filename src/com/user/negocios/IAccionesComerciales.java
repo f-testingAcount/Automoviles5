@@ -33,7 +33,9 @@ public interface IAccionesComerciales <T>{
     
     void enviarPedidoAFabricante(Marca marca, int unidades);
     
-    void venderVehiculo(Modelo modelo); 
+    Integer stock(String nombreArchivo, String nombreMarca, String denominacionModelo);
+    
+    void venderVehiculo(Marca marca, Modelo modelo, CaracteristicasTec caracteristicas, boolean stock); 
     
     void ingresarAlService(String ID);
     

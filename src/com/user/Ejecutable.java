@@ -169,8 +169,9 @@ public class Ejecutable {
                     modelo.setDenominacion(denominacion);
                     marca = new Marca(nombre);
                     modelo = new Modelo(tipoVehiculo, denominacion);
+                    var stock = modelo.getCantidad();
                     System.out.println("De la marca " + marca.getNombre() + " modelo " + modelo.getDenominacion() + " hay " + modelo.getCantidad() + " unidades\n");
-                    accion.venderVehiculo(modelo);
+                    //accion.venderVehiculo(marca, modelo, caracteristica );
                 }
 
                 case 4 -> { //Ingresar al service de garantia
@@ -273,7 +274,15 @@ public class Ejecutable {
                     }
                 }
 
-                case 17 -> { //Testeo
+                case 17 -> {
+                    System.out.println("Control de stock");
+                    System.out.println("Ingrese el nombre de la marca: ");
+                    var nombreMarca = inputString.nextLine();
+                    marca.setNombre(nombreMarca);
+                    System.out.println("Ingrese el modelo: ");
+                    var denominacionModelo = inputString.nextLine();
+                    modelo.setDenominacion(denominacionModelo);
+                    //System.out.println(datos.stock(ARCHIVO_MARCAS, ARCHIVO_MODELOS, nombreMarca, denominacionModelo));
                 }
                 
                 case 0 -> { //Salir

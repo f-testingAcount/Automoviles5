@@ -20,6 +20,10 @@ public interface IAccesoDatos <T> {
     
     T buscar(String nombreArchivo, Object object) throws AccesoDatosEx;
     
+    boolean modeloExiste(String nombreArchivo, String nombreMarca, String denominacionModelo) throws AccesoDatosEx;
+    
+    Integer stockModelo(String nombreArchivo, Modelo modelo, String denominacionModelo) throws AccesoDatosEx;
+    
 //    T buscar(String nombreArchivo, String object) throws AccesoDatosEx;
     
 //    void vincularMarcaModeloCarcTec(Marca marca, Modelo modelo, CaracteristicasTec caracteristica);
