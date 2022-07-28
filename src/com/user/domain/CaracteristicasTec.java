@@ -102,8 +102,6 @@ public class CaracteristicasTec {
     public void setModeloDenominacion(String modeloDenominacion) {
         this.modeloDenominacion = modeloDenominacion;
     }
-    
-    
 
     @Override
     public String toString() {

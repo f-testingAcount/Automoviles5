@@ -14,17 +14,17 @@ public interface IAccesoDatos <T> {
     
     void escribir(T object, String nombreArchivo) throws AccesoDatosEx;
     
-//    void sobreEscribir(T object, String nombreArchivo) throws AccesoDatosEx;
+    void sobreEscribir(String nombreArchivo, Object object, String modeloDenominacion) throws AccesoDatosEx;
 
     List<T> listar(T object, String nombreArchivo) throws AccesoDatosEx;
     
     T buscar(String nombreArchivo, Object object) throws AccesoDatosEx;
     
+    int buscarIndice(String nombreArchivo, Object object, String modeloDenominacion) throws AccesoDatosEx;
+    
     boolean modeloExiste(String nombreArchivo, String nombreMarca, String denominacionModelo) throws AccesoDatosEx;
     
     Integer stockModelo(String nombreArchivo, Modelo modelo, String denominacionModelo) throws AccesoDatosEx;
-    
-//    T buscar(String nombreArchivo, String object) throws AccesoDatosEx;
     
 //    void vincularMarcaModeloCarcTec(Marca marca, Modelo modelo, CaracteristicasTec caracteristica);
     

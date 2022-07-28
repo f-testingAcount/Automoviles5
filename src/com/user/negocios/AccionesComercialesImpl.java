@@ -5,7 +5,8 @@ import com.user.domain.*;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.*;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AccionesComercialesImpl implements IAccionesComerciales {
 
@@ -234,23 +235,31 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     }
 
     @Override
-    public Integer stock(String nombreArchivo, String nombreMarca, String denominacionModelo) {
-        Integer stock = 0;
-        switch (nombreArchivo) {
-            case ARCHIVO_MARCAS -> {
-            }
-        }
-        return stock;
-    }
-
-    @Override
-    public void enviarPedidoAFabricante(Marca marca, int unidades) {
+    public void enviarPedidoAFabricante(Marca marca, Modelo modelo, int unidades) {
         //En vase al stock con que cuenta el distribuidor solicitar mas unidades.
     }
 
     @Override
-    public void venderVehiculo(Marca marca, Modelo modelo, CaracteristicasTec caracteristicas, boolean stock) {
-
+    public void venderVehiculo(String nombreArchivo, Modelo modelo, String denominacionModelo) {
+        nombreArchivo = ARCHIVO_MODELOS;
+        //int stock = modelo.getCantidad();
+        try {
+            int existencia = datos.stockModelo(nombreArchivo, modelo, denominacionModelo);
+            if (existencia >= 1) {
+                int stock = existencia - 1;
+                datos.sobreEscribir(nombreArchivo, modelo, denominacionModelo);
+//                modelo = new Modelo(modelo.getTipoVehiculo(),
+//                                    modelo.getDenominacion(),
+//                                    modelo.getCantidad());
+                System.out.println("Se ha venido un vehiculo " + denominacionModelo + " Quedan en stock " + stock + " unidades.");
+            } else if(existencia <= 1) {
+//                this.enviarPedidoAFabricante(marca, stock, modelo.setCantidad(x unidades));
+                System.out.println("Se ha enviado pedido de reposicion de unidades a fabricante!");
+            }
+        } catch (AccesoDatosEx ex) {
+            System.out.println("Error al procesar venta!");
+            ex.printStackTrace(System.out);
+        }
     }
 
     @Override

@@ -49,11 +49,13 @@ public class Ejecutable {
                                14 - Buscar Distribuidor
                                15 - Buscar Agencia
                                16 - Borrar Archivo
-                               17 - Test
+                               17 - Test Control stock
+                               18 - Test Buscar indice
                                0  - Salir
                                """);
 
-            opcion = Integer.parseInt(input.nextLine());
+
+        opcion = Integer.parseInt(input.nextLine());
 
             switch (opcion) { //Iniciar archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
                 case 1 ->
@@ -158,20 +160,17 @@ public class Ejecutable {
 
                 case 3 -> { //Vender Vehiculo
                     System.out.println("A continuacion se solicitan los datos que se le solicitan del vehiculo que desea adquirir: ");
-                    System.out.println("Ingrese la marca del vehiculo: ");
-                    var nombre = inputString.nextLine();
-                    marca.setNombre(nombre);
-                    System.out.println("Ingrese el tipo de vehiculo (auto, camioneta, SUV, camion, moto: ");
+                    System.out.println("Ingrese el tipo de vehiculo (auto, camioneta, moto, camion): ");
                     var tipoVehiculo = inputString.nextLine();
                     modelo.setTipoVehiculo(tipoVehiculo);
                     System.out.println("Ingrese la denominacion del modelo: ");
-                    var denominacion = inputString.nextLine();
-                    modelo.setDenominacion(denominacion);
-                    marca = new Marca(nombre);
-                    modelo = new Modelo(tipoVehiculo, denominacion);
-                    var stock = modelo.getCantidad();
-                    System.out.println("De la marca " + marca.getNombre() + " modelo " + modelo.getDenominacion() + " hay " + modelo.getCantidad() + " unidades\n");
-                    //accion.venderVehiculo(marca, modelo, caracteristica );
+                    var denominacionModelo = inputString.nextLine();
+                    modelo.setDenominacion(denominacionModelo);
+                    //System.out.println("Ingrese la cantidad de unidades: ");
+                    //var cantidad = datos.stockModelo(tipoVehiculo, modelo, denominacionModelo);
+                    //modelo.setCantidad(cantidad - 1);
+                    modelo = new Modelo(tipoVehiculo, denominacionModelo);
+                    accion.venderVehiculo(ARCHIVO_MODELOS, modelo, denominacionModelo);
                 }
 
                 case 4 -> { //Ingresar al service de garantia
@@ -211,14 +210,13 @@ public class Ejecutable {
                     System.out.println("Ingrese la deniminacion del modelo: ");
                     var denominacion = inputString.nextLine();
                     modelo.setDenominacion(denominacion);
-                    System.out.println(datos.buscar(denominacion, opcion));
+                    System.out.println(datos.buscar(ARCHIVO_MODELOS, modelo));
                 }
                 
                 case 13 -> { //Buscar Caracteristica Tecnica
                     System.out.println("Ingrese la deniminacion del modelo del cual desea saber las caracteristicas: ");
                     var modeloDenominacion = inputString.nextLine();
                     caracteristica.setModeloDenominacion(modeloDenominacion);
-                    
                     System.out.println(datos.buscar(ARCHIVO_CARACTERISTICAS_TEC, caracteristica));
                 }
 
@@ -276,22 +274,29 @@ public class Ejecutable {
 
                 case 17 -> {
                     System.out.println("Control de stock");
-                    System.out.println("Ingrese el nombre de la marca: ");
-                    var nombreMarca = inputString.nextLine();
-                    marca.setNombre(nombreMarca);
+//                    System.out.println("Ingrese el nombre de la marca: ");
+//                    var nombreMarca = inputString.nextLine();
+//                    marca.setNombre(nombreMarca);
                     System.out.println("Ingrese el modelo: ");
                     var denominacionModelo = inputString.nextLine();
                     modelo.setDenominacion(denominacionModelo);
-                    //System.out.println(datos.stock(ARCHIVO_MARCAS, ARCHIVO_MODELOS, nombreMarca, denominacionModelo));
+                    datos.stockModelo(ARCHIVO_MODELOS, modelo, denominacionModelo);
+                }
+                
+                case 18 -> { //Buscar por indice
+                    System.out.println("Ingrese el nombre del modelo a indexar: ");
+                    var modeloDenominacion = inputString.nextLine();
+                    modelo.setDenominacion(modeloDenominacion);
+                    System.out.println(datos.buscarIndice(ARCHIVO_MODELOS, modelo, modeloDenominacion));
                 }
                 
                 case 0 -> { //Salir
                     System.out.println("Hasta pronto!");
                     System.exit(0);
                 }
-                
+                                
                 default -> { //Como evitar la excepcion si no ingreso un valor y solo ingreso enter?
-                    System.out.println("La opcion ingresada no existe! , ingrese una opcion valida! ");
+                        System.out.println("La opcion ingresada no existe! , ingrese una opcion valida! ");
                 }
             }
         } while (opcion != 0);
