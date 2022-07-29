@@ -54,7 +54,6 @@ public class Ejecutable {
                                0  - Salir
                                """);
 
-
         opcion = Integer.parseInt(input.nextLine());
 
             switch (opcion) { //Iniciar archivos (Marcas, Modelos, Caracteristicas Tecnicas, Distribuidores, Agencias).
@@ -169,7 +168,7 @@ public class Ejecutable {
                     //System.out.println("Ingrese la cantidad de unidades: ");
                     //var cantidad = datos.stockModelo(tipoVehiculo, modelo, denominacionModelo);
                     //modelo.setCantidad(cantidad - 1);
-                    modelo = new Modelo(tipoVehiculo, denominacionModelo);
+                    //modelo = new Modelo(tipoVehiculo, denominacionModelo);
                     accion.venderVehiculo(ARCHIVO_MODELOS, modelo, denominacionModelo);
                 }
 
@@ -272,18 +271,15 @@ public class Ejecutable {
                     }
                 }
 
-                case 17 -> {
+                case 17 -> { //Test control stock
                     System.out.println("Control de stock");
-//                    System.out.println("Ingrese el nombre de la marca: ");
-//                    var nombreMarca = inputString.nextLine();
-//                    marca.setNombre(nombreMarca);
                     System.out.println("Ingrese el modelo: ");
                     var denominacionModelo = inputString.nextLine();
                     modelo.setDenominacion(denominacionModelo);
                     datos.stockModelo(ARCHIVO_MODELOS, modelo, denominacionModelo);
                 }
                 
-                case 18 -> { //Buscar por indice
+                case 18 -> { //Test Buscar por indice
                     System.out.println("Ingrese el nombre del modelo a indexar: ");
                     var modeloDenominacion = inputString.nextLine();
                     modelo.setDenominacion(modeloDenominacion);

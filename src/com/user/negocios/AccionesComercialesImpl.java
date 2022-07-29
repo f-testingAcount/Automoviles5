@@ -247,10 +247,11 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             int existencia = datos.stockModelo(nombreArchivo, modelo, denominacionModelo);
             if (existencia >= 1) {
                 int stock = existencia - 1;
-                datos.sobreEscribir(nombreArchivo, modelo, denominacionModelo);
-//                modelo = new Modelo(modelo.getTipoVehiculo(),
-//                                    modelo.getDenominacion(),
-//                                    modelo.getCantidad());
+                modelo.setCantidad(stock);
+                modelo = new Modelo(modelo.getTipoVehiculo(),
+                                    modelo.getDenominacion(),
+                                    modelo.getCantidad());
+                datos.sobreEscribir(nombreArchivo, modelo, denominacionModelo);                
                 System.out.println("Se ha venido un vehiculo " + denominacionModelo + " Quedan en stock " + stock + " unidades.");
             } else if(existencia <= 1) {
 //                this.enviarPedidoAFabricante(marca, stock, modelo.setCantidad(x unidades));

@@ -14,7 +14,9 @@ public interface IAccesoDatos <T> {
     
     void escribir(T object, String nombreArchivo) throws AccesoDatosEx;
     
-    void sobreEscribir(String nombreArchivo, Object object, String modeloDenominacion) throws AccesoDatosEx;
+    void sobreEscribir(String nombreArchivo, Modelo modelo, String modeloDenominacion) throws AccesoDatosEx;
+    
+    void modificarDatoEnArchivo(String nombreArchivo, Modelo modelo) throws AccesoDatosEx;
 
     List<T> listar(T object, String nombreArchivo) throws AccesoDatosEx;
     

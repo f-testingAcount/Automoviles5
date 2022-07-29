@@ -10,10 +10,8 @@ import com.user.negocios.IAccionesComerciales;
 import static com.user.negocios.IAccionesComerciales.ARCHIVO_MARCAS;
 import static com.user.negocios.IAccionesComerciales.ARCHIVO_MODELOS;
 import java.io.*;
-import static java.nio.file.Files.lines;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class AccesoDatosImpl implements IAccesoDatos {
 
@@ -148,26 +146,45 @@ public class AccesoDatosImpl implements IAccesoDatos {
     }
 
     @Override
-    public void sobreEscribir(String nombreArchivo, Object object, String modeloDenominacion) throws AccesoDatosEx {
+    public void sobreEscribir(String nombreArchivo, Modelo modelo, String modeloDenominacion) throws AccesoDatosEx {
         File archivo = new File(nombreArchivo);
-        Modelo modelo = (Modelo) object;
-        object = this.buscar(nombreArchivo, modeloDenominacion);
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
             String linea = leer.readLine();
             while (linea != null) {
-                if (object.equals(linea)) {
-                    PrintWriter write = new PrintWriter(new FileWriter(archivo));
+                linea = linea.substring(18);
+                String tipoVehiculo = linea.substring(0, linea.indexOf(" "));
+                String denominacion = linea.substring(linea.indexOf("Denominacion:") + 14, linea.indexOf(" | Cantidad:"));
+                String cantidad = linea.substring(linea.indexOf("Cantidad:") + 10, linea.indexOf(" -"));
+                Modelo datos = new Modelo(tipoVehiculo, denominacion, Integer.valueOf(cantidad) - 1);
+                if (modeloDenominacion.equals(datos.getDenominacion())) {
+                    PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
                     write.println(modelo.toString());
                     write.close();
+                    break;
                 }
+                linea = leer.readLine();
             }
+            leer.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
             throw new AccesoDatosEx("Error al sobre escribir en el archivo modelo!" + ex.getMessage());
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
             throw new AccesoDatosEx("Error al sobre escribir en el archivo modelo!" + ex.getMessage());
+        }
+    }
+    
+    @Override
+    public void modificarDatoEnArchivo(String nombreArchivo, Modelo modelo) throws AccesoDatosEx {
+        File archivo = new File(ARCHIVO_MODELOS);
+        try {
+            PrintWriter write = new PrintWriter(new FileWriter(archivo, true));
+            write.print(this.listar(modelo, nombreArchivo));
+            write.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            throw new AccesoDatosEx("Error al modificar el archivo modelos!" + ex.getMessage());
         }
     }
 
@@ -318,7 +335,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
             case ARCHIVO_MARCAS -> {
                 Marca marca = (Marca) object;
                 //marca = new Marca();
-                List<Marca> marcas = new ArrayList<>();
+                //List<Marca> marcas = new ArrayList<>();
                 //busqueda = "";
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
@@ -331,7 +348,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String origen = linea.substring(linea.indexOf("Origen:") + 8, linea.indexOf(" | Logo"));
                         String logo = linea.substring(linea.indexOf("Logo:") + 6, linea.indexOf(" -"));
                         Marca datos = new Marca(nombre, origen, logo);
-                        marcas.add(datos);
+                        //marcas.add(datos);
                         //for (int i = 0; i < marcas.size(); i++) {
 //                            if (marca.getNombre() != null && linea.contains(marca.getNombre())) {
                         if (marca.getNombre() != null && marca.getNombre().equalsIgnoreCase(datos.getNombre())) {
@@ -385,7 +402,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
             }
             case IAccionesComerciales.ARCHIVO_MODELOS -> {
                 Modelo modelo = (Modelo) object;
-                List<Modelo> modelos = new ArrayList<>();
+                //List<Modelo> modelos = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -397,7 +414,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String denominacion = linea.substring(linea.indexOf("Denominacion:") + 14, linea.indexOf(" | Cantidad:"));
                         String cantidad = linea.substring(linea.indexOf("Cantidad:") + 10, linea.indexOf(" -"));
                         Modelo datos = new Modelo(tipoVehiculo, denominacion, Integer.valueOf(cantidad));
-                        modelos.add(datos);
+                        //modelos.add(datos);
                         if (modelo.getDenominacion() != null && modelo.getDenominacion().equalsIgnoreCase(datos.getDenominacion())) {
                             object = "Se ha localizado el modelo " + datos.getDenominacion() + " en el indice "
                                     + indice + " y hay en stock " + datos.getCantidad() + " unidades";
@@ -422,7 +439,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
             }
             case IAccionesComerciales.ARCHIVO_CARACTERISTICAS_TEC -> {
                 CaracteristicasTec caracteristica = (CaracteristicasTec) object;
-                List<CaracteristicasTec> caracteristicas = new ArrayList<>();
+                //List<CaracteristicasTec> caracteristicas = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -440,7 +457,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String carroceria = linea.substring(linea.indexOf("Carroceria:") + 12, linea.indexOf(" | id:"));
                         String id = linea.substring(linea.indexOf("id:") + 4, linea.indexOf(" -"));
                         CaracteristicasTec detalle = new CaracteristicasTec(modeloDenominacion, tipoMotor, cilindros, Integer.valueOf(cilindrada), Integer.valueOf(HP), caja, equipamiento, carroceria, id);
-                        caracteristicas.add(detalle);
+                        //caracteristicas.add(detalle);
                         if (caracteristica.getModeloDenominacion() != null && caracteristica.getModeloDenominacion().equalsIgnoreCase(detalle.getModeloDenominacion())) {
                             object = "El modelo " + caracteristica.getModeloDenominacion() + " que se encuentra en el indice " + indice + " tiene las siguientes caracteristicas: "
                                     + detalle.getTipoMotor() + " | "
@@ -472,7 +489,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
             }
             case IAccionesComerciales.ARCHIVO_DISTRIBUIDORES -> {
                 Distribuidor distribuidor = (Distribuidor) object;
-                List<Distribuidor> distribuidores = new ArrayList<>();
+                //List<Distribuidor> distribuidores = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -483,7 +500,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String nombreDistribuidor = linea.substring(0, linea.indexOf(" | "));
                         String pais = linea.substring(linea.indexOf("Pais:") + 6, linea.indexOf(" -"));
                         Distribuidor datos = new Distribuidor(nombreDistribuidor, pais);
-                        distribuidores.add(datos);
+                        //distribuidores.add(datos);
                         if (distribuidor.getNombreDistribuidor() != null && distribuidor.getNombreDistribuidor().equalsIgnoreCase(datos.getNombreDistribuidor())) {
                             object = "El distribuidor " + distribuidor.getNombreDistribuidor() + " se encuentra en el indice " + indice + " y se localiza en " + datos.getPais();
                             encontrado = true;
@@ -507,7 +524,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
             }
             case IAccionesComerciales.ARCHIVO_AGENCIAS -> {
                 Agencia agencia = (Agencia) object;
-                List<Agencia> agencias = new ArrayList<>();
+                //List<Agencia> agencias = new ArrayList<>();
                 try {
                     BufferedReader search = new BufferedReader(new FileReader(archivo));
                     var indice = 1;
@@ -519,7 +536,7 @@ public class AccesoDatosImpl implements IAccesoDatos {
                         String ciudad = linea.substring(linea.indexOf("Ciudad:") + 8, linea.indexOf(" | Marca:"));
                         String marcaComercializada = linea.substring(linea.indexOf("Marca:") + 7, linea.indexOf(" -"));
                         Agencia datos = new Agencia(nombreAgencia, ciudad, marcaComercializada);
-                        agencias.add(datos);
+                        //agencias.add(datos);
                         if (agencia.getNombreAgencia() != null && agencia.getNombreAgencia().equalsIgnoreCase(datos.getNombreAgencia())) {
                             object = "La agencia " + datos.getNombreAgencia() + " que se encuentra en el indice "
                                     + indice + ", se localiza en la ciudad de " + datos.getCiudad()
@@ -657,49 +674,6 @@ public class AccesoDatosImpl implements IAccesoDatos {
         return stock;
     }
 
-//    }
-//        Marca marca = new Marca(nombreMarca);
-//        marca.
-//        String stockDetalle = null;
-//        Marca marca = new Marca();
-//        Modelo modelo = new Modelo();
-//        String marcaEncontrada = null;
-//        int totalStock = 0;
-//        //List Modelo = new ArrayList<>();
-//        try {
-//            BufferedReader leer = new BufferedReader(new FileReader(archivoMarcas));
-//            String lineaMarcas = leer.readLine();
-//            while(lineaMarcas != null){
-//                lineaMarcas = lineaMarcas.substring(8);
-//                String nombre = lineaMarcas.substring(0, lineaMarcas.indexOf(" "));
-//                marca = new Marca(nombre);
-//                //String marcaEncontrada = null;
-//                Marca dato = new Marca(nombre);
-//                if (nombreMarca != null && nombreMarca.equalsIgnoreCase(dato.getNombre())) {
-//                    marcaEncontrada = dato.getNombre();
-//                }
-//            }
-//            //int totalStock = 0;
-//            leer = new BufferedReader(new FileReader(archivoModelos));
-//            String lineaModelos = leer.readLine();
-//            while(lineaModelos != null){
-//                lineaModelos.substring(25);
-//                String denominacion = lineaModelos.substring(lineaModelos.indexOf(0, lineaModelos.indexOf(" ")));
-//                String cantidad = lineaModelos.substring(lineaModelos.indexOf("Cantidad:") + 10, lineaModelos.indexOf(" -"));
-//                Modelo info = new Modelo(denominacion, Integer.valueOf(cantidad));
-//                if (modelo.getDenominacion() != null && modelo.getDenominacion().equalsIgnoreCase(info.getDenominacion())) {
-//                    totalStock = info.getCantidad();
-//                }
-//            }
-//        } catch (FileNotFoundException ex) {
-//            ex.printStackTrace(System.out);
-//            throw new AccesoDatosEx("Error al contar el stock!" + ex.getMessage());
-//        } catch (IOException ex) {
-//            ex.printStackTrace(System.out);
-//            throw new AccesoDatosEx("Error al contar el stock!" + ex.getMessage());
-//        }
-//        return stockDetalle = "De la marca " + marcaEncontrada + " hay en existencia " + totalStock;
-//    }
     @Override
     public void borrar(String nombreArchivo) throws AccesoDatosEx {
         File archivo = new File(nombreArchivo);
