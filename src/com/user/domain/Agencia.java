@@ -68,7 +68,7 @@ public class Agencia {
         sb.append(" | Ciudad: ").append(ciudad);
         sb.append(" | Marca: ").append(marcaComercializada);
         sb.append(" -");
-        sb.append("\n");
+        //sb.append("\n");
         return sb.toString();
     }
 }

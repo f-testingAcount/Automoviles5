@@ -116,7 +116,7 @@ public class CaracteristicasTec {
         sb.append(" | Carroceria: ").append(carroceria);
         sb.append(" | id: ").append(id);
         sb.append(" -");
-        sb.append("\n");
+        //sb.append("\n");
         return sb.toString();
     }
 

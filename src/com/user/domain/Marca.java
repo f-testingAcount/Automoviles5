@@ -85,7 +85,7 @@ public class Marca {
         sb.append(" | Origen: ").append(origen);
         sb.append(" | Logo: ").append(logo);
         sb.append(" -");
-        sb.append("\n");
+        //sb.append("\n");
         return sb.toString();
     }
 }

@@ -5,8 +5,6 @@ import com.user.domain.*;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AccionesComercialesImpl implements IAccionesComerciales {
 
@@ -242,20 +240,27 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     @Override
     public void venderVehiculo(String nombreArchivo, Modelo modelo, String denominacionModelo) {
         nombreArchivo = ARCHIVO_MODELOS;
-        //int stock = modelo.getCantidad();
         try {
             int existencia = datos.stockModelo(nombreArchivo, modelo, denominacionModelo);
             if (existencia >= 1) {
                 int stock = existencia - 1;
-                modelo.setCantidad(stock);
-                modelo = new Modelo(modelo.getTipoVehiculo(),
-                                    modelo.getDenominacion(),
-                                    modelo.getCantidad());
-                datos.sobreEscribir(nombreArchivo, modelo, denominacionModelo);                
+//                modelo.setCantidad(stock);
+//                modelo = new Modelo(modelo.getTipoVehiculo(),
+//                                    modelo.getDenominacion(),
+//                                    modelo.getCantidad());
+                List<Modelo> modelos = datos.listar(modelo, ARCHIVO_MODELOS);
+                for (int i = 0; i < modelos.size(); i++) {
+                    if (modelos.get(i).getDenominacion().equalsIgnoreCase(denominacionModelo)) {
+                        modelos.get(i).setCantidad(stock);
+                        break;
+                    }
+                }
+                datos.modificarDatoEnArchivo(ARCHIVO_MODELOS, modelos);
                 System.out.println("Se ha venido un vehiculo " + denominacionModelo + " Quedan en stock " + stock + " unidades.");
             } else if(existencia <= 1) {
-//                this.enviarPedidoAFabricante(marca, stock, modelo.setCantidad(x unidades));
+                System.out.println("No hay unidades disponibles del modelo " + denominacionModelo);
                 System.out.println("Se ha enviado pedido de reposicion de unidades a fabricante!");
+                System.out.println("Se le informara cuando haya unidades disponibles en stock.");
             }
         } catch (AccesoDatosEx ex) {
             System.out.println("Error al procesar venta!");

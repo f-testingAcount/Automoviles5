@@ -4,6 +4,7 @@ package com.user.negocios;
 import com.user.domain.CaracteristicasTec;
 import com.user.domain.Marca;
 import com.user.domain.Modelo;
+import java.util.List;
 
 
 public interface IAccionesComerciales <T>{
