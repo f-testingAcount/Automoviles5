@@ -6,8 +6,9 @@ import java.util.*;
 public class Modelo {
     
     private String tipoVehiculo; //Auto, camioneta, SUV, Moto, camion
-    String denominacion;
+    private String denominacion;
     private int cantidad;
+    private String nombreMarca;    
     private ArrayList<CaracteristicasTec> caracteristicas = new ArrayList<>();
 
     public Modelo() {}
@@ -32,6 +33,13 @@ public class Modelo {
         this.cantidad = cantidad;
     }
 
+    public Modelo(String nombreMarca, String tipoVehiculo, String denominacion, int cantidad) {
+        this.nombreMarca = nombreMarca;
+        this.tipoVehiculo = tipoVehiculo;
+        this.denominacion = denominacion;
+        this.cantidad = cantidad;
+    }
+    
     public String getTipoVehiculo() {
         return tipoVehiculo;
     }
@@ -56,6 +64,14 @@ public class Modelo {
         this.cantidad = cantidad;
     }
 
+    public String getNombreMarca() {
+        return nombreMarca;
+    }
+
+    public void setNombreMarca(String nombreMarca) {
+        this.nombreMarca = nombreMarca;
+    }
+
     public ArrayList<CaracteristicasTec> getCaracteristicas() {
         return caracteristicas;
     }
@@ -68,30 +84,31 @@ public class Modelo {
         caracteristicas.add(caracteristica);
     }
     
-    public CaracteristicasTec buscarModeloPorID(String id){
-        CaracteristicasTec encontrado = null;
-        for (int i = 0; i < caracteristicas.size(); i++) {
-            if (id.equalsIgnoreCase(caracteristicas.get(i).getId())) {
-                encontrado = caracteristicas.get(i);
-            }
-        }
-        return encontrado;
-    }
+//    public CaracteristicasTec buscarModeloPorID(String id){
+//        CaracteristicasTec encontrado = null;
+//        for (int i = 0; i < caracteristicas.size(); i++) {
+//            if (id.equalsIgnoreCase(caracteristicas.get(i).getId())) {
+//                encontrado = caracteristicas.get(i);
+//            }
+//        }
+//        return encontrado;
+//    }
     
-    public CaracteristicasTec buscarModeloPorDenominacion(String denominacion){
-        CaracteristicasTec encontrado = null;
-        for (int i = 0; i < caracteristicas.size(); i++) {
-            if (denominacion.equalsIgnoreCase(caracteristicas.get(i).getId())) {
-                encontrado = caracteristicas.get(i);
-            }
-        }
-        return encontrado;
-    }
+//    public CaracteristicasTec buscarModeloPorDenominacion(String denominacion){
+//        CaracteristicasTec encontrado = null;
+//        for (int i = 0; i < caracteristicas.size(); i++) {
+//            if (denominacion.equalsIgnoreCase(caracteristicas.get(i).getId())) {
+//                encontrado = caracteristicas.get(i);
+//            }
+//        }
+//        return encontrado;
+//    }
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tipo de Vehiculo: ").append(tipoVehiculo);
+        sb.append("Marca: ").append(nombreMarca);
+        sb.append(" | Tipo de Vehiculo: ").append(tipoVehiculo);
         sb.append(" | Denominacion: ").append(denominacion);
         sb.append(" | Cantidad: ").append(cantidad);
         sb.append(" -");

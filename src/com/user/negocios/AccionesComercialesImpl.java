@@ -5,6 +5,8 @@ import com.user.domain.*;
 import com.user.exceptions.AccesoDatosEx;
 import com.user.negocios.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AccionesComercialesImpl implements IAccionesComerciales {
 
@@ -89,7 +91,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             }
         } else if (nombreArchivo.equalsIgnoreCase("Modelos.txt")) {
             Modelo modelo = (Modelo) object;
-            modelo = new Modelo(modelo.getTipoVehiculo(),
+            modelo = new Modelo(modelo.getNombreMarca(), modelo.getTipoVehiculo(),
                     modelo.getDenominacion(),
                     modelo.getCantidad());
             boolean anexar = false;
@@ -130,7 +132,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
             }
         } else if (nombreArchivo.equalsIgnoreCase("Distribuidores.txt")) {
             Distribuidor distribuidor = (Distribuidor) object;
-            distribuidor = new Distribuidor(distribuidor.getNombreDistribuidor(), distribuidor.getPais());
+            distribuidor = new Distribuidor(distribuidor.getNombreDistribuidor(), distribuidor.getPais(), distribuidor.getMarcaDistribuida());
             boolean anexar = false;
             try {
                 if (anexar = datos.existe(ARCHIVO_DISTRIBUIDORES)) {
@@ -183,7 +185,7 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 try {
                     List<Modelo> modelos = this.datos.listar(modelo, ARCHIVO_MODELOS);
                     for (Modelo detalle : modelos) {
-                        System.out.println("Modelo: = " + detalle);
+                        System.out.println("Modelo: " + detalle);
                     }
                 } catch (AccesoDatosEx ex) {
                     System.out.println("Error al listar modelos!");
@@ -233,21 +235,13 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
     }
 
     @Override
-    public void enviarPedidoAFabricante(Marca marca, Modelo modelo, int unidades) {
-        //En vase al stock con que cuenta el distribuidor solicitar mas unidades.
-    }
-
-    @Override
-    public void venderVehiculo(String nombreArchivo, Modelo modelo, String denominacionModelo) {
+    public void venderVehiculo(String nombreArchivo, String denominacionModelo) {
         nombreArchivo = ARCHIVO_MODELOS;
+        Modelo modelo = new Modelo();
         try {
-            int existencia = datos.stockModelo(nombreArchivo, modelo, denominacionModelo);
+            int existencia = datos.stockModelo(nombreArchivo, denominacionModelo);
             if (existencia >= 1) {
                 int stock = existencia - 1;
-//                modelo.setCantidad(stock);
-//                modelo = new Modelo(modelo.getTipoVehiculo(),
-//                                    modelo.getDenominacion(),
-//                                    modelo.getCantidad());
                 List<Modelo> modelos = datos.listar(modelo, ARCHIVO_MODELOS);
                 for (int i = 0; i < modelos.size(); i++) {
                     if (modelos.get(i).getDenominacion().equalsIgnoreCase(denominacionModelo)) {
@@ -257,13 +251,41 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
                 }
                 datos.modificarDatoEnArchivo(ARCHIVO_MODELOS, modelos);
                 System.out.println("Se ha venido un vehiculo " + denominacionModelo + " Quedan en stock " + stock + " unidades.");
-            } else if(existencia <= 1) {
-                System.out.println("No hay unidades disponibles del modelo " + denominacionModelo);
-                System.out.println("Se ha enviado pedido de reposicion de unidades a fabricante!");
+            } else if(existencia == 1) {
+                System.out.println("Se ha enviado pedido de reposicion de unidades a fabricante.");
+            } else if (existencia == 0) {
+                System.out.println("Momentaneamente no hay disponibilidad de este modelo.");
                 System.out.println("Se le informara cuando haya unidades disponibles en stock.");
             }
         } catch (AccesoDatosEx ex) {
             System.out.println("Error al procesar venta!");
+            ex.printStackTrace(System.out);
+        }
+    }
+    
+    @Override
+    public void enviarRecibirPedidoDeFabricante(String nombreArchivo, Modelo modelo, String denominacionModelo, int unidadesRecibidas) {
+        nombreArchivo = ARCHIVO_MODELOS;
+        try {
+            List<Modelo> modelos = datos.listar(modelo, ARCHIVO_MODELOS);
+            var nuevoStock = unidadesRecibidas;
+            for (int i = 0; i < modelos.size(); i++) {
+                if (modelos.get(i).getDenominacion().equalsIgnoreCase(denominacionModelo)) {
+                    if (modelos.get(i).getCantidad() > 0) {
+                        modelos.get(i).setCantidad(modelos.get(i).getCantidad() + nuevoStock);
+                        System.out.println("Se incorporaron al stock existente " + nuevoStock + " unidades del modelo " + modelos.get(i).getDenominacion());
+                        break;
+                    } else {
+                        modelos.get(i).setCantidad(nuevoStock);
+                        System.out.println("Se incorporaron " + nuevoStock + " unidades del modelo " + modelos.get(i).getDenominacion());
+                        break;
+                    }
+                }
+            }
+            datos.modificarDatoEnArchivo(ARCHIVO_MODELOS, modelos);
+            datos.stockModelo(ARCHIVO_MODELOS, denominacionModelo);
+        } catch (AccesoDatosEx ex) {
+            System.out.println("Error al solicitar reposicion!");
             ex.printStackTrace(System.out);
         }
     }
@@ -275,16 +297,6 @@ public class AccionesComercialesImpl implements IAccionesComerciales {
 
     @Override
     public void enviarUnidadesAAgencia(Marca marca, Modelo modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void vincularMarcaModelo(Marca marca, Modelo modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void vincularModeloCaracteristicasTec(Modelo modelo, CaracteristicasTec caracteristica) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

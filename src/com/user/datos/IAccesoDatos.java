@@ -14,7 +14,7 @@ public interface IAccesoDatos <T> {
     
     void escribir(T object, String nombreArchivo) throws AccesoDatosEx;
     
-    void sobreEscribir(String nombreArchivo, Modelo modelo, String modeloDenominacion) throws AccesoDatosEx;
+//    void sobreEscribir(String nombreArchivo, Modelo modelo, String modeloDenominacion) throws AccesoDatosEx;
     
     void modificarDatoEnArchivo(String nombreArchivo, List<Modelo> modelos) throws AccesoDatosEx;
 
@@ -24,9 +24,9 @@ public interface IAccesoDatos <T> {
     
     int buscarIndice(String nombreArchivo, Object object, String modeloDenominacion) throws AccesoDatosEx;
     
-    boolean modeloExiste(String nombreArchivo, String nombreMarca, String denominacionModelo) throws AccesoDatosEx;
+//    boolean modeloExiste(String nombreArchivo, String nombreMarca, String denominacionModelo) throws AccesoDatosEx;
     
-    Integer stockModelo(String nombreArchivo, Modelo modelo, String denominacionModelo) throws AccesoDatosEx;
+    Integer stockModelo(String nombreArchivo, String denominacionModelo) throws AccesoDatosEx;
     
 //    void vincularMarcaModeloCarcTec(Marca marca, Modelo modelo, CaracteristicasTec caracteristica);
     

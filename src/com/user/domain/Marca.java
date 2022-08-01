@@ -8,7 +8,7 @@ public class Marca {
     private String nombre;
     private String origen;
     private String logo;
-    private boolean stock;
+    private int stock;
     private List<Marca> marcas = new ArrayList<>();
     private List<Modelo> modelos = new ArrayList<>();
 
@@ -48,11 +48,11 @@ public class Marca {
         this.logo = logo;
     }
 
-    public boolean isStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(boolean stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
@@ -68,15 +68,15 @@ public class Marca {
         modelos.add(modelo);
     }
     
-    public Modelo buscarModeloPorDenominacion(String denominacion){
-        Modelo encontrado = null;
-        for (int i = 0; i < modelos.size(); i++) {
-            if (denominacion.equalsIgnoreCase(modelos.get(i).getDenominacion())) {
-                encontrado = modelos.get(i);
-            }
-        }
-        return encontrado;
-    }
+//    public Modelo buscarModeloPorDenominacion(String denominacion){
+//        Modelo encontrado = null;
+//        for (int i = 0; i < modelos.size(); i++) {
+//            if (denominacion.equalsIgnoreCase(modelos.get(i).getDenominacion())) {
+//                encontrado = modelos.get(i);
+//            }
+//        }
+//        return encontrado;
+//    }
     
     @Override
     public String toString() {

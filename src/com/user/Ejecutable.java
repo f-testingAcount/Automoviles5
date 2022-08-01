@@ -51,6 +51,8 @@ public class Ejecutable {
                                16 - Borrar Archivo
                                17 - Test Control stock
                                18 - Test Buscar indice
+                               19 - Test Buscar desde metodo en clase
+                               20 - Test Enviar pedido / Recibir unidades
                                0  - Salir
                                """);
 
@@ -86,6 +88,9 @@ public class Ejecutable {
                         }
                         case 2 -> {
                             String nombreArchivo = "Modelos.txt";
+                            System.out.println("Ingrese la marca: ");
+                            var nombreMarca = inputString.nextLine();
+                            modelo.setNombreMarca(nombreMarca);
                             System.out.println("Ingrese el tipo de vehiculo (auto, camioneta, moto, camion): ");
                             var tipoVehiculo = inputString.nextLine();
                             modelo.setTipoVehiculo(tipoVehiculo);
@@ -136,6 +141,9 @@ public class Ejecutable {
                             System.out.println("Ingrese el pais donde se localiza la sede: ");
                             var pais = inputString.nextLine();
                             distribuidor.setPais(pais);
+                            System.out.println("Ingrse la marca distribuida: ");
+                            var marcaDistribuida = inputString.nextLine();
+                            distribuidor.setMarcaDistribuida(marcaDistribuida);
                             accion.agregar(nombreArchivo, distribuidor);
                         }
                         case 5 -> {
@@ -165,11 +173,7 @@ public class Ejecutable {
                     System.out.println("Ingrese la denominacion del modelo: ");
                     var denominacionModelo = inputString.nextLine();
                     modelo.setDenominacion(denominacionModelo);
-                    //System.out.println("Ingrese la cantidad de unidades: ");
-                    //var cantidad = datos.stockModelo(tipoVehiculo, modelo, denominacionModelo);
-                    //modelo.setCantidad(cantidad - 1);
-                    //modelo = new Modelo(tipoVehiculo, denominacionModelo);
-                    accion.venderVehiculo(ARCHIVO_MODELOS, modelo, denominacionModelo);
+                    accion.venderVehiculo(ARCHIVO_MODELOS, denominacionModelo);
                 }
 
                 case 4 -> { //Ingresar al service de garantia
@@ -276,7 +280,7 @@ public class Ejecutable {
                     System.out.println("Ingrese el modelo: ");
                     var denominacionModelo = inputString.nextLine();
                     modelo.setDenominacion(denominacionModelo);
-                    datos.stockModelo(ARCHIVO_MODELOS, modelo, denominacionModelo);
+                    datos.stockModelo(ARCHIVO_MODELOS, denominacionModelo);
                 }
                 
                 case 18 -> { //Test Buscar por indice
@@ -284,6 +288,20 @@ public class Ejecutable {
                     var modeloDenominacion = inputString.nextLine();
                     modelo.setDenominacion(modeloDenominacion);
                     System.out.println(datos.buscarIndice(ARCHIVO_MODELOS, modelo, modeloDenominacion));
+                }
+                
+                case 19 -> { // Test buscar desde metodo en clase
+//                    System.out.println("Ingrese el nombre de la agencia: ");
+//                    var nombreAgencia = inputString.nextLine();
+//                    System.out.println(distribuidor.buscarAgenciaPorNombre(nombreAgencia));
+                }
+                
+                case 20 -> { // Test Solicitar / Recibir unidades
+                    System.out.println("Ingrese el nombre del modelo del cual se necesita stock: ");
+                    var denominacionModelo = inputString.nextLine();
+                    System.out.println("Ingrese la cantidad de unidades solicitadas a incorporar en stock: ");
+                    var unidadesRecibidas = Integer.parseInt(input.nextLine());
+                    accion.enviarRecibirPedidoDeFabricante(ARCHIVO_MODELOS, modelo, denominacionModelo, unidadesRecibidas);
                 }
                 
                 case 0 -> { //Salir

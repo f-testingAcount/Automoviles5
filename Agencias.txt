@@ -2,3 +2,7 @@ Nombre: La maquina italiana | Ciudad: Miami | Marca: Ferrari -
 Nombre: Il Toro automovili | Ciudad: Turin | Marca: Lamborghini -
 Nombre: Deutsche wagen | Ciudad: Berlin | Marca: Porsche -
 Nombre: Future Voiture | Ciudad: Paris | Marca: Bugatti -
+Nombre: Babarian wagen | Ciudad: California | Marca: BMW -
+Nombre: Sports cars | Ciudad: New York | Marca: Pagani -
+Nombre: Estrella motors | Ciudad: Canada | Marca: Mercedes Benz -
+Nombre: Autos italianos | Ciudad: Paraguay | Marca: Maserati -

@@ -1,11 +1,20 @@
-Tipo de Vehiculo: Auto | Denominacion: Testarossa | Cantidad: 49 -
-Tipo de Vehiculo: Auto | Denominacion: F40 | Cantidad: 1310 -
-Tipo de Vehiculo: Auto | Denominacion: 308 GTS | Cantidad: 56 -
-Tipo de Vehiculo: Auto | Denominacion: Aventador | Cantidad: 60 -
-Tipo de Vehiculo: Auto | Denominacion: Miura | Cantidad: 200 -
-Tipo de Vehiculo: Auto | Denominacion: Siam | Cantidad: 9 -
-Tipo de Vehiculo: SUV | Denominacion: LM002 | Cantidad: 99 -
-Tipo de Vehiculo: SUV | Denominacion: Urus | Cantidad: 200 -
-Tipo de Vehiculo: Auto | Denominacion: 911 turbo s | Cantidad: 0 -
-Tipo de Vehiculo: Auto | Denominacion: L voiture noire | Cantidad: 1 -
-Tipo de Vehiculo: Auto | Denominacion: Countach | Cantidad: 2 -
+Marca: Ferrari | Tipo de Vehiculo: Auto | Denominacion: Testarossa | Cantidad: 50 -
+Marca: Ferrari | Tipo de Vehiculo: Auto | Denominacion: F40 | Cantidad: 1311 -
+Marca: Ferrari | Tipo de Vehiculo: Auto | Denominacion: 308 GTS | Cantidad: 56 -
+Marca: Lamborghini | Tipo de Vehiculo: Auto | Denominacion: Aventador | Cantidad: 60 -
+Marca: Lamborghini | Tipo de Vehiculo: Auto | Denominacion: Miura | Cantidad: 200 -
+Marca: Lamborghini | Tipo de Vehiculo: Auto | Denominacion: Siam | Cantidad: 5 -
+Marca: Lamborghini | Tipo de Vehiculo: SUV | Denominacion: LM002 | Cantidad: 99 -
+Marca: Lamborghini | Tipo de Vehiculo: SUV | Denominacion: Urus | Cantidad: 200 -
+Marca: Porsche | Tipo de Vehiculo: Auto | Denominacion: 911 turbo s | Cantidad: 1 -
+Marca: Bugatti | Tipo de Vehiculo: Auto | Denominacion: L voiture noire | Cantidad: 1 -
+Marca: Lamborghini | Tipo de Vehiculo: Auto | Denominacion: Countach | Cantidad: 2 -
+Marca: Ferrari | Tipo de Vehiculo: Auto | Denominacion: La Ferrari aperta | Cantidad: 9 -
+Marca: Ferrari | Tipo de Vehiculo: Auto | Denominacion: 288 GTO | Cantidad: 25 -
+Marca: Bugatti | Tipo de Vehiculo: Auto | Denominacion: Veyron | Cantidad: 26 -
+Marca: Bugatti | Tipo de Vehiculo: Auto | Denominacion: Centodeci | Cantidad: 10 -
+Marca: Rolls Royce | Tipo de Vehiculo: Auto | Denominacion: Phantom | Cantidad: 50 -
+Marca: BMW | Tipo de Vehiculo: SUV | Denominacion: X6M | Cantidad: 130 -
+Marca: Pagani | Tipo de Vehiculo: Auto | Denominacion: Zonda | Cantidad: 38 -
+Marca: Mercedes Benz | Tipo de Vehiculo: Auto | Denominacion: SL 600 AMG | Cantidad: 60 -
+Marca: Maserati | Tipo de Vehiculo: Auto | Denominacion: Quattroporte | Cantidad: 110 -

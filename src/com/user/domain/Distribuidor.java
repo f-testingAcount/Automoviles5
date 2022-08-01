@@ -8,6 +8,7 @@ public class Distribuidor {
     
     private String nombreDistribuidor;
     private String pais;
+    private String marcaDistribuida;
     private List<Agencia> agencias = new ArrayList<>(); 
 
     public Distribuidor() {}
@@ -16,9 +17,10 @@ public class Distribuidor {
         this.nombreDistribuidor = nombreDistribuidor;
     }
 
-    public Distribuidor(String nombreDistribuidor, String pais) {
+    public Distribuidor(String nombreDistribuidor, String pais, String marcaDistribuida) {
         this.nombreDistribuidor = nombreDistribuidor;
         this.pais = pais;
+        this.marcaDistribuida = marcaDistribuida;
     }
 
     public String getNombreDistribuidor() {
@@ -37,6 +39,16 @@ public class Distribuidor {
         this.pais = pais;
     }
 
+    public String getMarcaDistribuida() {
+        return marcaDistribuida;
+    }
+
+    public void setMarcaDistribuida(String marcaDistribuida) {
+        this.marcaDistribuida = marcaDistribuida;
+    }
+    
+    
+
     public List<Agencia> getAgencias() {
         return agencias;
     }
@@ -49,21 +61,24 @@ public class Distribuidor {
         agencias.add(agencia);
     }
     
-    public Agencia buscarAgenciaPorNombre(String nombreAgencia){
-        Agencia encontrada = null;
-        for (int i = 0; i < agencias.size(); i++) {
-            if (nombreAgencia.equalsIgnoreCase(agencias.get(i).getNombreAgencia())) {
-                encontrada = agencias.get(i);
-            }
-        }
-        return encontrada;
-    }
+    
+    
+//    public Agencia buscarAgenciaPorNombre(String nombreAgencia){
+//        Agencia encontrada = null;
+//        for (int i = 0; i < agencias.size(); i++) {
+//            if (nombreAgencia.equalsIgnoreCase(agencias.get(i).getNombreAgencia())) {
+//                encontrada = agencias.get(i);
+//            }
+//        }
+//        return encontrada;
+//    }
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nombre: ").append(nombreDistribuidor);
         sb.append(" | Pais: ").append(pais);
+        sb.append(" | Marca Distribuida: ").append(marcaDistribuida);
         sb.append(" -");
         //sb.append("\n");
         return sb.toString();

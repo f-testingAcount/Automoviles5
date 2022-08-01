@@ -1,5 +1,6 @@
 package com.user.domain;
 
+import com.user.domain.personal.*;
 import java.util.*;
 
 
@@ -8,6 +9,11 @@ public class Agencia {
     private String ciudad;
     private String marcaComercializada;
     private List<Modelo> modelos = new ArrayList<>();
+    private List<Gerente> gerentes = new ArrayList<>();
+    private List<Vendedor> vendedor = new ArrayList<>();
+    private List<Recepcionista> recepcionista = new ArrayList<>();
+    private List<Mecanico> mecanico = new ArrayList<>();
+    private List<Mantenimiento> mantenimiento = new ArrayList<>();
 
     public Agencia() {}
 
@@ -44,23 +50,55 @@ public class Agencia {
     public void setMarcaComercializada(String marcaComercializada) {
         this.marcaComercializada = marcaComercializada;
     }
-    
-    public int totalStock(){
-        int stock = 0;
-        for (int i = 0; i < modelos.size(); i++) {
-            //Solucionado //La existencia de stock de una determinada marca la podria controlar con invocando un metodo definido en la clase Marca 
-            stock = stock + modelos.get(i).getCantidad(); //Como sumo las cantidades que me devuelve de cada posicion? para saber cuantos modelos hay de cada tipo
-        }
-        return stock;
-    }
-    
-    public void venderVehiculo(Marca marca, Modelo modelo, CaracteristicasTec caracteristica){
-        //Controlar el stock de marca, modelo y caracteristicas tecnicas invocando metodos predefinidos.
-        //Efectuar la venta descontando el modelo del stock.
-        //Ademas en funcion al diseño del programa donde conviene ubicar el metodo venderVehiculo? En la clase agencia que es la que por logica ejecuta
-        //la accion o en la clase acciones comerciales donde implemento los varios de los metodos de interaccion con el cliente?
+
+    public List<Modelo> getModelos() {
+        return modelos;
     }
 
+    public void setModelos(List<Modelo> modelos) {
+        this.modelos = modelos;
+    }
+
+    public List<Gerente> getGerentes() {
+        return gerentes;
+    }
+
+    public void setGerentes(List<Gerente> gerentes) {
+        this.gerentes = gerentes;
+    }
+
+    public List<Vendedor> getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(List<Vendedor> vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public List<Recepcionista> getRecepcionista() {
+        return recepcionista;
+    }
+
+    public void setRecepcionista(List<Recepcionista> recepcionista) {
+        this.recepcionista = recepcionista;
+    }
+
+    public List<Mecanico> getMecanico() {
+        return mecanico;
+    }
+
+    public void setMecanico(List<Mecanico> mecanico) {
+        this.mecanico = mecanico;
+    }
+
+    public List<Mantenimiento> getMantenimiento() {
+        return mantenimiento;
+    }
+
+    public void setMantenimiento(List<Mantenimiento> mantenimiento) {
+        this.mantenimiento = mantenimiento;
+    }
+                
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

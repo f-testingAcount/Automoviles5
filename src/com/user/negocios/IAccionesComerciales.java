@@ -1,10 +1,8 @@
 
 package com.user.negocios;
 
-import com.user.domain.CaracteristicasTec;
 import com.user.domain.Marca;
 import com.user.domain.Modelo;
-import java.util.List;
 
 
 public interface IAccionesComerciales <T>{
@@ -21,17 +19,13 @@ public interface IAccionesComerciales <T>{
     
     void listarArchivo(String nombreArchivo, T object);
     
-    void enviarPedidoAFabricante(Marca marca, Modelo modelo, int unidades);
+    void enviarRecibirPedidoDeFabricante(String nombreArchivo, Modelo modelo, String denominacionModelo, int unidades);
     
-    void venderVehiculo(String nombreArchivo, Modelo modelo, String denominaicionModelo); 
+    void venderVehiculo(String nombreArchivo, String denominaicionModelo); 
     
     void ingresarAlService(String ID);
     
     void enviarUnidadesAAgencia(Marca marca, Modelo modelo);
-    
-    void vincularMarcaModelo(Marca marca, Modelo modelo);
-    
-    void vincularModeloCaracteristicasTec(Modelo modelo, CaracteristicasTec caracteristica);
     
     void borrarArchivo(String nombreArchivo);
             
